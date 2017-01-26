@@ -16,6 +16,9 @@ public class Player implements Serializable {
     private String name;
     private double bestTime;
 
+    public Player() {
+    }
+    
     public String getName() {
         return name;
     }
