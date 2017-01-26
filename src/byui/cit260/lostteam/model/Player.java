@@ -15,4 +15,22 @@ public class Player implements Serializable {
     // class instance variables
     private String name;
     private double bestTime;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getBestTime() {
+        return bestTime;
+    }
+
+    public void setBestTime(double bestTime) {
+        this.bestTime = bestTime;
+    }
+    
+    
 }
