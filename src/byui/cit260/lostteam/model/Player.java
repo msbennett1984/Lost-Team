@@ -37,6 +37,11 @@ public class Player implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Player{" + "name=" + name + ", bestTime=" + bestTime + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 5;
         return hash;
