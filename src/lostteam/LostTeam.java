@@ -5,6 +5,8 @@
  */
 package lostteam;
 
+import byui.cit260.lostteam.model.Actor;
+import byui.cit260.lostteam.model.Item;
 import byui.cit260.lostteam.model.Player;
 
 /**
@@ -24,6 +26,27 @@ public class LostTeam {
         
         String playerInfo = playerOne.toString();
         System.out.println(playerInfo);
+        
+        //Item test by S. Bennett
+        Item itemOne = new Item();
+        
+        itemOne.setNoItems(5);
+        itemOne.setName("mushroom");
+        itemOne.setRequiredAmount(6);
+        
+        String itemInfo = itemOne.toString();
+        System.out.println(itemInfo);
+        
+        //Actor test by S. Bennett
+        Actor actorOne = new Actor();
+        
+        actorOne.setName("Scientist");
+        actorOne.setCooridinates("Subway");
+        actorOne.setSpokenTo(Boolean.TRUE);
+        actorOne.setClueGiven("See the Deli Owner");
+        
+        String actorInfo = actorOne.toString();
+        System.out.println(actorInfo);
     }
     
 }
