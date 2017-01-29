@@ -5,9 +5,14 @@
  */
 package lostteam;
 
+
 import byui.cit260.lostteam.model.Clue;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
+
+import byui.cit260.lostteam.model.Actor;
+import byui.cit260.lostteam.model.Item;
+
 import byui.cit260.lostteam.model.Player;
 
 /**
@@ -23,7 +28,7 @@ public class LostTeam {
         // Player class test
         Player playerOne = new Player();
         
-        playerOne.setName("Wilma Flintstone");
+        playerOne.setName("Fred Flintstone");
         playerOne.setBestTime(7.00);
         
         String playerInfo = playerOne.toString();
@@ -64,6 +69,28 @@ public class LostTeam {
         String mapInfo = mapOne.toString();
         System.out.println(mapInfo);
          
+
+        //Item test by S. Bennett
+        Item itemOne = new Item();
+        
+        itemOne.setNoItems(5);
+        itemOne.setName("mushroom");
+        itemOne.setRequiredAmount(6);
+        
+        String itemInfo = itemOne.toString();
+        System.out.println(itemInfo);
+        
+        //Actor test by S. Bennett
+        Actor actorOne = new Actor();
+        
+        actorOne.setName("Scientist");
+        actorOne.setCooridinates("Subway");
+        actorOne.setSpokenTo(Boolean.TRUE);
+        actorOne.setClueGiven("See the Deli Owner");
+        
+        String actorInfo = actorOne.toString();
+        System.out.println(actorInfo);
+
     }
     
 }
