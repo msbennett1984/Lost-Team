@@ -19,6 +19,14 @@ public class Scene implements Serializable {
     private String description;
     private String signSymbol;
 
+   
+     // constructor function
+    public Scene() {
+    }
+
+    
+    
+    // getters and setters
     public String getDescription() {
         return description;
     }
