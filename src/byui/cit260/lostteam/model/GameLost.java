@@ -17,13 +17,9 @@ public class GameLost implements Serializable{
     private String totalTime;
     private double LastPlayer;
     private Player player;
-    private static GameLost instance;
 
-    public GameLost() {
-    }
-
-    
-    
+        
+   
     public String getTotalTime() {
         return totalTime;
     }
@@ -48,20 +44,12 @@ public class GameLost implements Serializable{
         this.player = player;
     }
 
-    public static GameLost getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(GameLost instance) {
-        GameLost.instance = instance;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.totalTime);
-        hash = 59 * hash + (int) (Double.doubleToLongBits(this.LastPlayer) ^ (Double.doubleToLongBits(this.LastPlayer) >>> 32));
-        hash = 59 * hash + Objects.hashCode(this.player);
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.totalTime);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.LastPlayer) ^ (Double.doubleToLongBits(this.LastPlayer) >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.player);
         return hash;
     }
 
@@ -90,6 +78,7 @@ public class GameLost implements Serializable{
     public String toString() {
         return "GameLost{" + "totalTime=" + totalTime + ", LastPlayer=" + LastPlayer + ", player=" + player + '}';
     }
+    
     
     
 }
