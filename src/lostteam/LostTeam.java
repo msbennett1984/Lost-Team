@@ -13,6 +13,9 @@ import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Item;
 
+import byui.cit260.lostteam.model.GameLost;
+import byui.cit260.lostteam.model.Scene;
+
 import byui.cit260.lostteam.model.Player;
 
 /**
