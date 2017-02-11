@@ -113,6 +113,81 @@ public class ClueControlTest {
         
         // compare expected return value with actual value returned
         assertEquals(expResult, result, 1);
+    
+    
+        /************************
+         * Test case #6
+         ************************/
+        System.out.println("\tTest case #6");
+        
+        // input values for test case 6
+        height = 1;
+        radius = 4;
+        
+        expResult = 16.76; // expected output returned value
+        
+        // call function to run test
+        result = instance.calcVolumeOfFlask(height, radius);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.01);
+        
+        
+        
+        /************************
+         * Test case #7
+         ************************/
+        System.out.println("\tTest case #7");
+        
+        // input values for test case 7
+        height = 23;
+        radius = 1;
+        
+        expResult = 24.08; // expected output returned value
+        
+        // call function to run test
+        result = instance.calcVolumeOfFlask(height, radius);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.01);
+        
+        
+        /************************
+         * Test case #8
+         ************************/
+        System.out.println("\tTest case #8");
+        
+        // input values for test case 8
+        height = 4;
+        radius = 2;
+        
+        expResult = 16.76; // expected output returned value
+        
+        // call function to run test
+        result = instance.calcVolumeOfFlask(height, radius);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.01);
+        
+        
+        /************************
+         * Test case #9
+         ************************/
+        System.out.println("\tTest case #9");
+        
+        // input values for test case 9
+        height = 5;
+        radius = 2;
+        
+        expResult = 20.95; // expected output returned value
+        
+        // call function to run test
+        result = instance.calcVolumeOfFlask(height, radius);
+        
+        // compare expected return value with actual value returned
+        assertEquals(expResult, result, 0.01);
+ 
+        
     }
 
     /**
