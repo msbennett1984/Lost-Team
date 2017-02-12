@@ -27,4 +27,32 @@ public class ClueControl {
             return volume;
         }
     }
+    
+    
+    // Calculate Trajectory Distance of a bullet function (Dallin Barlow)
+    public double calcTrajectoryDistance(double velocity, double gravity) {
+        
+        // if user inputs a zero or a negative number in for velocity
+        if (velocity <= 0){
+            return -1;
+        }
+        // if user inputs a zero or a negative number in for gravity
+        else if (gravity <= 0){
+            return -2;
+        }
+        // the distance is calculated based on user's input for velocity and gravity
+        double distance = Math.pow(velocity, 2) / gravity ;       
+        // if the calculated distance is too small
+        if (distance < 1){
+            return -3;
+        }
+        // if the calculated distance is too large
+        else if (distance > 300){
+            return -4;
+        }
+        // if the distance is in the allowed range
+        else {
+            return distance;
+        }
+    }
 }
