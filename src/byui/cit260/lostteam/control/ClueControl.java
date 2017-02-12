@@ -40,8 +40,10 @@ public class ClueControl {
         else if (gravity <= 0){
             return -2;
         }
+       
         // the distance is calculated based on user's input for velocity and gravity
         double distance = Math.pow(velocity, 2) / gravity ;       
+        
         // if the calculated distance is too small
         if (distance < 1){
             return -3;
