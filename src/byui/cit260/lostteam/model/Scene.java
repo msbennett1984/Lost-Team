@@ -18,7 +18,7 @@ public class Scene implements Serializable {
     //class instance variables
     private String description;
     private String signSymbol;
-    private String name;
+    //private String name;
 
    
      // constructor function
