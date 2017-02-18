@@ -25,14 +25,34 @@ import byui.cit260.lostteam.view.StartProgramView;
  */
 public class LostTeam {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static GameLost currentGame = null;
+    private static Player player = null;
+    
     public static void main(String[] args) {
     
     // create StartProgramViewOrig and display the start program view
     StartProgramView startProgramView = new StartProgramView();
     startProgramView.displayStartProgramView();
     }
+
+    
+    //Getters and Setters
+    public static GameLost getCurrentGame() {
+        return currentGame;
+    }
+
+    public static void setCurrentGame(GameLost currentGame) {
+        LostTeam.currentGame = currentGame;
+    }
+
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(Player player) {
+        LostTeam.player = player;
+    }
+    
+    
     
 }

@@ -5,6 +5,8 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.model.Player;
 import java.util.Scanner;
 
 /**
@@ -128,8 +130,41 @@ public class StartProgramView {
     }
 
     private boolean doAction(String playersName) {
-        System.out.println("\n*** doAction() called");
+        // if the length of the playersName < 2 characters
+        if (playersName.length() < 2){
+            System.out.println("\nInvalid players name: " +
+                    "The name must be greater than one character in length");
+            return false;
+        }
+        // call createPlayer() control function
+        Player player = GameControl.createPlayer(playersName);
+        
+        // if unsuccessful
+        if(player == null){
+            System.out.println("\nError in creating the player.");
+            return false;
+        }
+        
+        // display next view
+        this.displayNextView(player);
+        
+        // if successful
         return true;
+
     }
+
+    private void displayNextView(Player player) {
+        System.out.println("\n****************************************"
+                + "\n Welcome to the game LOST "+ player.getName()
+                + "\n We hope you have a great time in your adventure!!!"
+                + "\n*****************************************"); 
+        
+        // Creates Main Menu Object
+        MainMenuView mainMenuView = new MainMenuView();
+        
+        // Display Main Menu View
+        mainMenuView.displayMainMenuView();
+    }
+
     
 }
