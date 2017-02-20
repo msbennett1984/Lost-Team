@@ -9,6 +9,11 @@ import java.util.Scanner;
 import lostteam.LostTeam;
 import byui.cit260.lostteam.control.GameControl;
 import byui.cit260.lostteam.model.GameLost;
+import java.awt.Graphics;
+import java.awt.Shape;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Position;
+import javax.swing.text.View;
 
 
 
@@ -69,11 +74,13 @@ public class MainMenuView extends View {
         }
         return false;
     }
+    
+    
 
-    public void startNewGame() {
+   public void startNewGame() {
         GameControl.createNewGame(LostTeam.getPlayer());
 
-        GameMenuView gameMenu = new GameMenuView();
+        GameMenuView gameMenu = new GameMenuView() {};
         gameMenu.display();
 
 
@@ -112,5 +119,6 @@ try{
                 ErrorView.display(this.getClass().getName(),"exit game");
     }
 
+       
     
 }
