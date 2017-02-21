@@ -122,11 +122,11 @@ public class StartProgramView {
             if (value.length() < 1) { // value is blank
                 System.out.println("\nInvalid value: value can not be blank");
                 continue;     
-        }
+            }
             
-        break; // end the loop    
+            break; // end the loop    
         }
-    return value; // return the value entered
+        return value; // return the value entered
     }
 
     private boolean doAction(String playersName) {

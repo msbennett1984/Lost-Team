@@ -8,117 +8,111 @@ package byui.cit260.lostteam.view;
 import java.util.Scanner;
 import lostteam.LostTeam;
 import byui.cit260.lostteam.control.GameControl;
-import byui.cit260.lostteam.model.GameLost;
-import java.awt.Graphics;
-import java.awt.Shape;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Position;
-import javax.swing.text.View;
-
-
-
 
 /**
  *
  * @author Dallin Barlow
  */
-
-//public class MainMenuView {
-
-   // void displayMainMenuView() {
-       // System.out.println("\n**** displayMenu() function called ****"); //To change body of generated methods, choose Tools | Templates.
-   // }
-    
-
-public class MainMenuView extends View {
+public class MainMenuView {
 
     private String menu;
     
-    public MainMenuView(){
-            super("\n"
-                  + "\n------------------------"
-                  + "\n | Main Menu"
-                  + "\n------------------------"
+    public MainMenuView() {
+        this.menu = "\n"
+                  + "\n-----------------------------------------"
+                  + "\n| Main Menu                             |"
+                  + "\n-----------------------------------------"
                   + "\nN - Start New Game"
                   + "\nO - Load Game"
-                  + "\nH - Help"
+                  + "\nH - Get help on how to play the game"
                   + "\nS - Save Game"
                   + "\nE - Exit Game"
-                  + "\n------------------------");
-                 
+                  + "\n----------------------------------------";
     }
-    @Override
-    public boolean doAction(String value) {
-        char selection = value.charAt(0);
-        switch (selection) {
-
-            case 'N':
+    
+    /**
+     * displays the start program view
+     */
+    public void displayMainMenuView() {
+        int returnValue = 0; // loop while non-negative
+        do {
+            // prompt for and get players name
+            String menuOption = this.getMenuOption();
+            if (menuOption.toUpperCase().equals("E")) // user wants to quit
+                return; // exit the game
+            // do the requested action and display the next view
+            returnValue = this.doAction(menuOption);
+        } while (returnValue >= 0);
+    }
+    
+    private String getMenuOption() {
+        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
+        String value = ""; // value to be returned
+        boolean valid = false; // initialize to not valid
+        
+        while (!valid) { // loop while an invalid value is entered
+            System.out.println("\n" + this.menu);
+            
+            value = keyboard.nextLine(); // get next line typed on keyboard
+            value = value.trim(); // trim off leading and trailing blanks
+            
+            if (value.length() < 1) {
+                System.out.println("\nInvalid value: value cannot be blank");
+                continue;
+            }
+            
+            break; // end the loop
+        }
+        
+        return value; // return the value entered
+    }
+    
+    private int doAction(String choice) {
+        int returnValue = 0; // exit if non-zero
+        choice = choice.toUpperCase(); // convert choice to upper case
+        
+        switch (choice) {
+            case "N":
                 this.startNewGame();
                 break;
-            case 'S':
-                saveGame();
+            case "O":
+                this.startExistingGame();
                 break;
-            case 'O':
-                openGame();
+            case "H":
+                returnValue = this.displayHelpMenu();
                 break;
-            case 'H':
-                showHelpMenu();
+            case "S":
+                this.saveGame();
                 break;
-            case 'E':
-                exitGame();
-                return true;
-
+            case "E":
+                returnValue = -1; // exit the game
+                break;
             default:
-                ErrorView.display(this.getClass().getName(),"Invalid selection - Try again");
+                System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-        return false;
+        
+        return returnValue;
     }
-    
-    
 
-   public void startNewGame() {
+    private void startNewGame() {
         GameControl.createNewGame(LostTeam.getPlayer());
-
+        
         GameMenuView gameMenu = new GameMenuView() {};
-        gameMenu.display();
+        gameMenu.displayMenu();
+    }
 
+    private void startExistingGame() {
+        System.out.println("\n*** startExistingGame stub function called ***");
+    }
 
+    private int displayHelpMenu() {
+        HelpMenuView helpMenu = new HelpMenuView();
+        return helpMenu.displayHelpMenuView();
     }
 
     private void saveGame() {
-this.console.println("Enter the path where you want to save the game");
-String filePath = this.getInput();
-
-try{
-    GameControl.saveGame(LostTeam.getCurrentGame(), filePath);
-}catch(Exception ex){
-    ErrorView.display("MainMenuView", ex.getMessage());
-}
+        System.out.println("\n*** saveGame stub function called ***");
     }
-
-    private void openGame() {
- this.console.println("Enter file path of saved game");
-        
-        String filePath = this.getInput();
-         try{
-             GameControl.openGame(filePath);
-         }catch(Exception ex){
-             ErrorView.display("MainMenuView",ex.getMessage());
-         }
-         
-         GameMenuView gameMenu = new GameMenuView();
-         gameMenu.display();    }
-
-    private void showHelpMenu() {
-    HelpMenuView helpMenu = new HelpMenuView();
-    helpMenu.display();
-    }
-
-    private void exitGame() {
-                ErrorView.display(this.getClass().getName(),"exit game");
-    }
-
-       
     
 }

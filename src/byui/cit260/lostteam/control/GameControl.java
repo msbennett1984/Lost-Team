@@ -29,5 +29,10 @@ public class GameControl {
         
         return player;
     }
+
+    public static void createNewGame(Player player) {
+        System.out.println("\n*** createNewGame stub function called ***");
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
