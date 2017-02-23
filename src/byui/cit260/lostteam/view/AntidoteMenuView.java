@@ -9,21 +9,17 @@ package byui.cit260.lostteam.view;
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
-public class GameMenuView extends MenuView {
-
-    private final SceneMenuView sceneMenuView;
+public class AntidoteMenuView extends MenuView {
     
-    public GameMenuView() {
+    public AntidoteMenuView() {
         super("\n"
             + "\n-----------------------------------------"
-            + "\n| Game Menu View                        |"
+            + "\n| Antidote Menu                         |"
             + "\n-----------------------------------------"
-            + "\nS - Scene menu"
-            + "\nB - Back to Main Menu"
-            + "\nQ - Quit game"
+            + "\nC - Create Antidote"
+            + "\nB - Back to Scene Menu"
             + "\n----------------------------------------",
-        "Q");
-        this.sceneMenuView = new SceneMenuView();
+        null);
     }
     
     protected ReturnValue doAction(String choice) {
@@ -31,8 +27,8 @@ public class GameMenuView extends MenuView {
         boolean ignoreBreak = true;
 
         switch (choice) {
-            case "S":
-                value = this.sceneMenuView.displayMenu();
+            case "C":
+                value = this.createAntidote();
                 break;
             case "B":
                 value = ReturnValue.BREAK;
@@ -55,4 +51,9 @@ public class GameMenuView extends MenuView {
         return value;
     }
 
+    private ReturnValue createAntidote() {
+        System.out.println("\n*** createAntidote stub function called ***");
+        return ReturnValue.CONTINUE;
+    }
+    
 }
