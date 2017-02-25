@@ -5,6 +5,10 @@
  */
 package byui.cit260.lostteam.control;
 
+import byui.cit260.lostteam.model.GameInstance;
+import byui.cit260.lostteam.model.Inventory;
+import byui.cit260.lostteam.model.InventoryItem;
+import byui.cit260.lostteam.model.Item;
 import byui.cit260.lostteam.model.Player;
 import lostteam.LostTeam;
 
@@ -13,26 +17,29 @@ import lostteam.LostTeam;
  * @author Dallin Barlow
  */
 public class GameControl {
-    
-    // creates a new player
-    public static Player createPlayer(String playerName){
-        
-        if (playerName == null){
-            return null;
-        }
-        // creates an object of the Player class
-        Player player = new Player();
-        player.setName(playerName);
-        
-        // saves the player
-        LostTeam.setPlayer(player);
-        
-        return player;
-    }
 
     public static void createNewGame(Player player) {
-        System.out.println("\n*** createNewGame stub function called ***");
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GameInstance game = new GameInstance();
+        
+        Item fakeItemA = new Item();
+        fakeItemA.setName("fake item A");
+        Item fakeItemB = new Item();
+        fakeItemB.setName("fake item B");
+        
+        InventoryItem fakeInventoryItemA = new InventoryItem(fakeItemA);
+        fakeInventoryItemA.setQuantity(5);
+        InventoryItem fakeInventoryItemB = new InventoryItem(fakeItemB);
+        fakeInventoryItemB.setQuantity(3);
+        
+        Inventory inventory = new Inventory();
+        inventory.addItem(fakeInventoryItemA);
+        inventory.addItem(fakeInventoryItemB);
+        
+        game.setInventory(inventory);
+        game.setPlayer(player);
+        game.setRemainingTime(120);
+        
+        LostTeam.setCurrentGame(game);
     }
     
 }

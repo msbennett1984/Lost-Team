@@ -5,6 +5,12 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.GameInstance;
+import byui.cit260.lostteam.model.Inventory;
+import byui.cit260.lostteam.model.InventoryItem;
+import java.util.ArrayList;
+import lostteam.LostTeam;
+
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
@@ -20,6 +26,29 @@ public class AntidoteMenuView extends MenuView {
             + "\nB - Back to Scene Menu"
             + "\n----------------------------------------",
         null);
+    }
+    
+    protected void beforeGetInput() {
+        GameInstance game = LostTeam.getCurrentGame();
+        ArrayList<InventoryItem> items = game.getInventory().getItems();
+        int size = items.size();
+        String itemsLabel = "items";
+        if (size == 1) {
+            itemsLabel = "item";
+        }
+        System.out.println(""
+                         + "\n****************************************"
+                         + "\n You have " + size + " " + itemsLabel + " in your inventory."
+                         + "\n Attempting to create the antidote will"
+                         + "\n take 15 minutes (you have " + game.getRemainingTime() + " left)."
+                         + "\n*****************************************");
+        if (size > 0) {
+            System.out.println("\nInventory items:");
+            for (int i = 0; i < size; i++) {
+                System.out.println("  " + items.get(i).getQuantity() + " - " + items.get(i).getItem().getName());
+            }
+        }
+        return;
     }
     
     protected ReturnValue doAction(String choice) {
@@ -52,7 +81,10 @@ public class AntidoteMenuView extends MenuView {
     }
 
     private ReturnValue createAntidote() {
-        System.out.println("\n*** createAntidote stub function called ***");
+        System.out.println("Attempting to create antidote...");
+        System.out.println("FAILED");
+        GameInstance game = LostTeam.getCurrentGame();
+        game.setRemainingTime(game.getRemainingTime() - 15);
         return ReturnValue.CONTINUE;
     }
     

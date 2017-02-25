@@ -40,12 +40,17 @@ public class MenuView {
         return value;
     }
     
+    protected void beforeGetInput() {
+        return;
+    }
+    
     private String getInput() {
         Scanner keyboard = new Scanner(System.in); // get infile for keyboard
         String value = ""; // value to be returned
         boolean valid = false; // initialize to not valid
         
         while (!valid) { // loop while an invalid value is entered
+            this.beforeGetInput();
             System.out.println("\n" + this.menu);
             
             value = keyboard.nextLine(); // get next line typed on keyboard

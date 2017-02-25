@@ -13,7 +13,7 @@ import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Item;
 
-import byui.cit260.lostteam.model.GameLost;
+import byui.cit260.lostteam.model.GameInstance;
 import byui.cit260.lostteam.model.Scene;
 
 import byui.cit260.lostteam.model.Player;
@@ -25,23 +25,21 @@ import byui.cit260.lostteam.view.StartProgramView;
  */
 public class LostTeam {
 
-    private static GameLost currentGame = null;
+    private static GameInstance currentGame = null;
     private static Player player = null;
-    
+
     public static void main(String[] args) {
-    
-    // create StartProgramViewOrig and display the start program view
-    StartProgramView startProgramView = new StartProgramView();
-    startProgramView.displayStartProgramView();
+        // create StartProgramViewOrig and display the start program view
+        StartProgramView startProgramView = new StartProgramView();
+        startProgramView.displayStartProgramView();
     }
 
-    
     //Getters and Setters
-    public static GameLost getCurrentGame() {
+    public static GameInstance getCurrentGame() {
         return currentGame;
     }
 
-    public static void setCurrentGame(GameLost currentGame) {
+    public static void setCurrentGame(GameInstance currentGame) {
         LostTeam.currentGame = currentGame;
     }
 
@@ -52,7 +50,5 @@ public class LostTeam {
     public static void setPlayer(Player player) {
         LostTeam.player = player;
     }
-    
-    
-    
+
 }

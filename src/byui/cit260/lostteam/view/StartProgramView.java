@@ -6,6 +6,7 @@
 package byui.cit260.lostteam.view;
 
 import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.control.PlayerControl;
 import byui.cit260.lostteam.model.Player;
 import java.util.Scanner;
 
@@ -137,7 +138,7 @@ public class StartProgramView {
             return false;
         }
         // call createPlayer() control function
-        Player player = GameControl.createPlayer(playersName);
+        Player player = PlayerControl.createPlayer(playersName);
         
         // if unsuccessful
         if(player == null){
