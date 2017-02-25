@@ -47,7 +47,7 @@ public class SceneMenuView extends MenuView {
                 value = this.talkToPerson();
                 break;                
             case "P":
-                value = this.playerStats();
+                this.playerStats();
                 break;
             case "B":
                 value = ReturnValue.BREAK;
@@ -79,8 +79,10 @@ public class SceneMenuView extends MenuView {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private ReturnValue playerStats() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void playerStats() {
+        
+        PlayerStatsView playerStats = new PlayerStatsView();
+        playerStats.displayPlayerStats();
     }
     
 }
