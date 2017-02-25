@@ -13,27 +13,26 @@ import java.util.Objects;
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
 public class Player implements Serializable {
-    // class instance variables
-    private String name;
-    private double bestTime;
+    // instance variables
+    private final String name;
+    private long bestTime;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getBestTime() {
+    public long getBestTime() {
         return bestTime;
     }
 
-    public void setBestTime(double bestTime) {
-        this.bestTime = bestTime;
+    public void setBestTime(long bestTime) {
+        if (bestTime < this.bestTime) {
+            this.bestTime = bestTime;
+        }
     }
 
     @Override
@@ -43,7 +42,9 @@ public class Player implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + (int) (this.bestTime ^ (this.bestTime >>> 32));
         return hash;
     }
 
@@ -59,12 +60,10 @@ public class Player implements Serializable {
             return false;
         }
         final Player other = (Player) obj;
-        if (Double.doubleToLongBits(this.bestTime) != Double.doubleToLongBits(other.bestTime)) {
+        if (this.bestTime != other.bestTime) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.name, other.name);
     }
+
 }
