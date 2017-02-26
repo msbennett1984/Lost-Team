@@ -12,6 +12,7 @@ package byui.cit260.lostteam.view;
 public class SceneMenuView extends MenuView {
     
     private final AntidoteMenuView antidoteMenuView;
+    private final PlayerStatsView playerStatsView;
     
     public SceneMenuView() {
         super("\n"
@@ -27,6 +28,7 @@ public class SceneMenuView extends MenuView {
             + "\n----------------------------------------",
         null);
         this.antidoteMenuView = new AntidoteMenuView();
+        this.playerStatsView = new PlayerStatsView();
     }
 
     protected ReturnValue doAction(String choice) {
@@ -47,7 +49,7 @@ public class SceneMenuView extends MenuView {
                 value = this.talkToPerson();
                 break;                
             case "P":
-                this.playerStats();
+                this.playerStatsView.displayMenu();
                 break;
             case "B":
                 value = ReturnValue.BREAK;
@@ -77,12 +79,6 @@ public class SceneMenuView extends MenuView {
 
     private ReturnValue talkToPerson() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void playerStats() {
-        
-        PlayerStatsView playerStats = new PlayerStatsView();
-        playerStats.displayPlayerStats();
     }
     
 }

@@ -11,93 +11,72 @@ import java.util.Scanner;
  *
  * @author Dallin Barlow
  */
-public class PlayerStatsView {
-    
-    
-    // creates a string variable to store info in
-    private String menu;
-    
-    // string variable given a value: Player Stat Menu
-    public void displayPlayerStats(){
-        this.menu = "\n                                   " +
-                "\n---------------------------------------" +
-                "\n            | Player Stats |           " +
-                "\n---------------------------------------" +
-                "\n P - People Spoken To (Clues Given)    " +
-                "\n I - Item Inventory                    " +
-                "\n L - Locations Visited                 " +
-                "\n T - Time Remaining                    " +
-                "\n B - Back to Location Menu             " +
-                "\n                                       " ;
+public class PlayerStatsView extends MenuView {
+
+      
+    public PlayerStatsView() {
+        super("\n"
+            + "\n-----------------------------------------"
+            + "\n|             Player Stats              |"
+            + "\n-----------------------------------------"
+            + "\nP - People Spoken To (Clues)             "
+            + "\nI - Item Inventory                       "
+            + "\nL - Locations Visited                    "
+            + "\nT - Time Remaining                       "
+            + "\nB - Back to Scene Menu                   "
+            + "\n-----------------------------------------",
+        null);
     }
-    
-    // gets the imput from the player
-    public String getInput(){
-        Scanner keyboard = new Scanner(System.in);
-        boolean valid = false;
-        String selection = null;
-        
-        // while a valid name has not been retrieved
-        while(!valid){
-            
-            // gets the value entered by the user
-            selection = keyboard.nextLine();
-            selection = selection.trim();
-            
-            // if the selection is less than one character
-            if (selection.length() < 1){
-                System.out.println("\n******* Invalid selection ** Try Again *******");
-                continue;
-            }
-            break;  
-        }
-        
-        // returns the name
-        return selection;
-    }
-    
-    // switch statement function to know where to go based on user's input
-    public void doAction(char choice){
-        
+
+    protected ReturnValue doAction(String choice) {
+        ReturnValue value = ReturnValue.CONTINUE;
+        boolean ignoreBreak = true;
+ 
         switch (choice) {
-            case 'P':
-                this.peopleSpokenTo();
-                break;   
-            case 'I':
-                this.itemInventory();
+            case "P":
+                    value = this.peopleSpokenTo();
                 break;
-            case 'L':
-                this.locationsVisited();
+            case "I":
+                value = this.itemInventory();
                 break;
-            case 'T':
-                this.timeRemaining();
+            case "L":
+                value = this.locationsVisited();
                 break;
-            case 'B':
-                this.backToSceneMenu();
+            case "T":
+                value = this.timeRemaining();
+                break;                
+            case "B":
+                value = ReturnValue.BREAK;
+                ignoreBreak = false;
                 break;
             default:
-                System.out.println("\n******* Invalid selection - Try Again *******");
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
         }
+        
+        // for certain sub-menus (like PlayerStatsMenu), we don't want to
+        // return to the main menu, but to stop here
+        if (ignoreBreak == true && value == ReturnValue.BREAK) {
+            value = ReturnValue.CONTINUE;
+        }
+        
+        return value;
+    }  
+
+    private ReturnValue locationsVisited() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void peopleSpokenTo() {
-        System.out.println("\n*** People Spoken To stub function called ***");
+    private ReturnValue timeRemaining() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void itemInventory() {
-        System.out.println("\n*** Item Inventory stub function called ***");
+    private ReturnValue itemInventory() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void locationsVisited() {
-        System.out.println("\n*** Locations Visited stub function called ***"); 
+    private ReturnValue peopleSpokenTo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void timeRemaining() {
-        System.out.println("\n*** Time Remaining stub function called ***"); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void backToSceneMenu() {
-        SceneMenuView back = new SceneMenuView();
-        back.displayMenu();
-    }
 }

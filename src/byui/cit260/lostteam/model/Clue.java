@@ -20,6 +20,10 @@ public class Clue implements Serializable {
     private boolean received;
     // the variable that tells whether the clue being given requires an answer to a math problem or not is stored
     private boolean type;
+    // the variable that stores the users input 1
+    private double input1;
+    // the variable that stores the users input 2
+    private double input2;
 
     // default constructor function
     public Clue() {
@@ -50,6 +54,24 @@ public class Clue implements Serializable {
     public void setType(boolean type) {
         this.type = type;
     }
+
+    public double getInput1() {
+        return input1;
+    }
+
+    public void setInput1(double input1) {
+        this.input1 = input1;
+    }
+
+    public double getInput2() {
+        return input2;
+    }
+
+    public void setInput2(double input2) {
+        this.input2 = input2;
+    }
+    
+    
 
     
     // hash and equals code
