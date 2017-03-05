@@ -5,7 +5,7 @@
  */
 package byui.cit260.lostteam.view;
 
-import byui.cit260.lostteam.view.MenuView.ReturnValue;
+// import byui.cit260.lostteam.view.MenuView.ReturnValue;
 
 /**
  *
@@ -13,6 +13,66 @@ import byui.cit260.lostteam.view.MenuView.ReturnValue;
  */
 public class HelpMenuView extends MenuView {
     
+    public HelpMenuView(){
+        super("\n"
+            + "\n-----------------------------------------"
+            + "\n| Help Menu                             |"
+            + "\n-----------------------------------------"
+            + "\nG - Goal of Game"
+            + "\nH - How to Move"
+            + "\nF - Finding Clues"
+            + "\nB - Back to Main Menu"
+            + "\nE - Quit Game"
+            + "\n----------------------------------------");
+    }
+    
+    
+    @Override
+    public boolean doAction(String choice) {
+        // changes all values to uppercase
+        choice = choice.toUpperCase();
+        
+        switch (choice) {
+            case "G":
+                this.goalOfGame();
+                break;
+            case "H":
+                this.howToMove();
+            case "F":
+                this.findingClues();
+                break;
+            case "B":
+                this.mainMenu();
+                break;
+            default:
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
+        }
+      
+        return false;
+    }
+    
+    
+    private void goalOfGame() {
+        System.out.println("\n*** goalOfGame function called ***");
+    }
+
+    private void howToMove() {
+        System.out.println("\n*** howToMove function called ***");
+    }
+
+    private void findingClues() {
+        System.out.println("\n*** findingClues function called ***");
+    }
+
+    private void mainMenu() {
+        MainMenuView mainMenu = new MainMenuView();
+        mainMenu.display();
+    }
+    
+    
+    
+    /*
     public HelpMenuView() {
         super("\n"
             + "\n-----------------------------------------"
@@ -68,4 +128,6 @@ public class HelpMenuView extends MenuView {
         System.out.println("\n*** displayFindingClues stub function called ***");
         return ReturnValue.CONTINUE;
     }
+*/
+    
 }

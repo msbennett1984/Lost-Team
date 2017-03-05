@@ -30,35 +30,36 @@ public abstract class MenuView implements ViewInterface {
             // prompt for and get user's input
             String value = this.getInput();
             //user wants to quit
-            if(value.toUpperCase().equals("E"))
+            if(value.toUpperCase().equals("E")){
                 // exits the view
                 return;
+            }
             
             // does the requested action and displays the next view
             done = this.doAction(value);
         }
         // exit the view when done == true
         while(!done);
+        
     }
     
     @Override
         public String getInput() {
         Scanner keyboard = new Scanner(System.in); // get infile for keyboard
-        String value = ""; // value to be returned
+        String value = null; // value to be returned
         boolean valid = false; // initialize to not valid
         
-        while (!valid) { // loop while an invalid value is entered
-            
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim off leading and trailing blanks
-            
-            if (value.length() < 1) {
-                System.out.println("\nInvalid value: value cannot be blank");
-                continue;
-            }
-            break; // end the loop
-        }
         
+        while(!valid) {
+            System.out.println(this.displayMessage);
+            value = keyboard.nextLine();
+            value = value.trim();
+            
+            if (value == null || value.length() == 0) {
+                System.out.println("Invalid input please input a correct character");
+            }
+            break;
+        }
         return value.toUpperCase(); // return the value entered
     }
 

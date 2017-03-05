@@ -10,7 +10,101 @@ package byui.cit260.lostteam.view;
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
 public class SceneMenuView extends MenuView {
+  
     
+    
+    public SceneMenuView() {
+        super("\n"
+            + "\n-----------------------------------------"
+            + "\n| Scene Menu                            |"
+            + "\n-----------------------------------------"
+            + "\nM - Move: change Location"
+            + "\nC - Create Antidote"
+            + "\nS - Search Location"
+            + "\nT - Talk to Person"
+            + "\nP - Player Stats"
+            + "\nB - Back to Game Menu"
+            + "\n----------------------------------------");
+    }
+    
+    @Override
+    public boolean doAction(String choice) {
+        // changes all values to uppercase
+        choice = choice.toUpperCase();
+        
+        switch (choice) {
+            case "M":
+                this.moveMenu();
+                break;
+            case "C":
+                this.createAntidote();
+                break;
+            case "S":
+                this.searchLocation();
+                break;
+            case "T":
+                this.talkToPerson();
+                break;
+            case "P":
+                this.playerStats();
+                break;
+            case "B":
+                this.gameMenu();
+                break;
+            default:
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
+        }
+        return false;
+    }
+    
+    private void moveMenu() {
+        MoveView moveMenu = new MoveView();
+        moveMenu.display();
+    }
+
+    private void createAntidote() {
+        AntidoteMenuView antidoteView = new AntidoteMenuView();
+        antidoteView.display();
+    }
+
+    private void searchLocation() {
+        // SearchLocationView searchLocation = new SearchLocationView();
+        // searchLocation
+        System.out.println("\n SearchLocation Function called ");
+    }
+
+    private void talkToPerson() {
+        System.out.println("\n TalktoPerson Function called ");
+    }
+
+    private void playerStats() {
+        PlayerStatsView playerStats = new PlayerStatsView();
+        playerStats.display();
+    }
+
+    private void gameMenu() {
+        GameMenuView gameMenu = new GameMenuView();
+        gameMenu.display();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*  
     private final AntidoteMenuView antidoteMenuView;
     private final PlayerStatsView playerStatsView;
     
@@ -80,5 +174,5 @@ public class SceneMenuView extends MenuView {
     private ReturnValue talkToPerson() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    */
 }

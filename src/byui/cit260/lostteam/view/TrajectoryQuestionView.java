@@ -11,7 +11,40 @@ package byui.cit260.lostteam.view;
  */
 public class TrajectoryQuestionView extends MenuView {
     
-    // two variables the user will input to guess the distance
+    public TrajectoryQuestionView(){    
+        super ( "\n                                                 "
+        + "\n-------------------------------------------------------"
+        + "\nA police officer is investigating the scene of a crime "
+        + "\nthat was committed. 'It was a murder,' he tells you.   "
+        + "\nThe victim was shot with a 9 mm, we have a rough idea  "
+        + "\nof the distance, but we need to find the TRAJECTORY of "
+        + "\nthe bullet. Help us out and I will tell you something  "
+        + "\nuseful. Will you help?                                 "
+        + "\nY - Yes I will help                                    "
+        + "\nN - No I will not help (back to Scene Menu             ");
+    }
+    
+   @Override
+    public boolean doAction(String choice) {
+        // changes all values to uppercase
+        choice = choice.toUpperCase();
+        
+        switch (choice) {
+            case "Y":
+                this.answerQuestion();
+                break;
+            case "N":
+                this.sceneMenu();
+                break;
+            default:
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
+        }
+        return false;
+    } 
+
+/*
+// two variables the user will input to guess the distance
     private double velocity;
     private double gravity;
     
@@ -64,6 +97,16 @@ public class TrajectoryQuestionView extends MenuView {
     }
         private ReturnValue helpOfficer() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
+
+    private void answerQuestion() {
+        System.out.println("\n*** AnswerQuestion Function called ***");
+    }
+
+    private void sceneMenu() {
+        SceneMenuView sceneMenu = new SceneMenuView();
+        sceneMenu.display();
     }
 }
 

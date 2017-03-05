@@ -11,6 +11,48 @@ package byui.cit260.lostteam.view;
  */
 public class GameMenuView extends MenuView {
 
+    public GameMenuView(){
+        super("\n"
+            + "\n-----------------------------------------"
+            + "\n| Game Menu View                        |"
+            + "\n-----------------------------------------"
+            + "\nS - Scene menu"
+            + "\nB - Back to Main Menu"
+            + "\nE - Exit game"
+            + "\n----------------------------------------");
+    }
+    
+    @Override
+    public boolean doAction(String choice) {
+        // changes all values to uppercase
+        choice = choice.toUpperCase();
+        
+        switch (choice) {
+            case "S":
+                this.sceneMenu();
+                break;
+            case "B":
+                this.mainMenu();
+                break;
+            default:
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
+        }
+        return false;
+    }
+    
+    private void sceneMenu() {
+        SceneMenuView sceneMenu = new SceneMenuView();
+        sceneMenu.display();
+    }
+
+    private void mainMenu() {
+        MainMenuView mainMenu = new MainMenuView();
+        mainMenu.display();
+    }
+    
+    
+    /*
     private final SceneMenuView sceneMenuView;
     
     public GameMenuView() {
@@ -54,5 +96,6 @@ public class GameMenuView extends MenuView {
 
         return value;
     }
+*/
 
 }

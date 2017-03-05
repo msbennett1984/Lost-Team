@@ -24,19 +24,16 @@ public class MoveView extends MenuView{
             + "\n   E - East"
             + "\n   W - West"
             + "\n   Q - Quit Game"
-            + "\n----------------------------------------",
-        "Q");
-                
-                
+            + "\n----------------------------------------");     
     }
     
   
-   public boolean doAction(String Menu, String Exit) {
+    @Override
+    public boolean doAction(String Menu) {
         Menu = Menu.toUpperCase(); //convert to uppercase
         
         switch (Menu) {
             case "N": //North
-                
                 this.north();
                 break;
             case "S": //South

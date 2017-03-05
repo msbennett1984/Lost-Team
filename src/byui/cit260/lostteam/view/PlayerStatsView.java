@@ -13,7 +13,72 @@ import java.util.Scanner;
  */
 public class PlayerStatsView extends MenuView {
 
+   public PlayerStatsView() {
+        super("\n"
+            + "\n-----------------------------------------"
+            + "\n|             Player Stats              |"
+            + "\n-----------------------------------------"
+            + "\nP - People Spoken To (Clues)             "
+            + "\nI - Item Inventory                       "
+            + "\nL - Locations Visited                    "
+            + "\nT - Time Remaining                       "
+            + "\nB - Back to Scene Menu                   "
+            + "\n-----------------------------------------");
+   }
+   
+   @Override
+    public boolean doAction(String choice) {
+        // changes all values to uppercase
+        choice = choice.toUpperCase();
+        
+        switch (choice) {
+            case "P":
+                this.peopleSpokenTo();
+                break;
+            case "I":
+                this.itemInventory();
+                break;
+            case "L":
+                this.locationsVisited();
+                break;
+            case "T":
+                this.timeRemaining();
+                break;
+            case "B":
+                this.sceneMenu();
+                break;
+            default:
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
+        }
       
+        return false;
+    }
+    
+    private void peopleSpokenTo() {
+        System.out.println("*** PeopleSpokenTo function called ***");
+    }
+
+    private void itemInventory() {
+        System.out.println("*** ItemInventory function called ***");
+    }
+
+    private void locationsVisited() {
+        System.out.println("*** LocationsVisited function called ***");
+    }
+
+    private void timeRemaining() {
+        System.out.println("*** TimeRemaining function called ***");
+    }
+
+    private void sceneMenu() {
+        SceneMenuView sceneMenu = new SceneMenuView();
+        sceneMenu.display();
+    }
+    
+    
+    
+    /*   
     public PlayerStatsView() {
         super("\n"
             + "\n-----------------------------------------"
@@ -78,5 +143,6 @@ public class PlayerStatsView extends MenuView {
     private ReturnValue peopleSpokenTo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+*/
 
 }

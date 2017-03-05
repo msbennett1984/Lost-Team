@@ -46,9 +46,6 @@ public class MainMenuView extends MenuView  {
             case "S":
                 this.saveGame();
                 break;
-            case "E":
-                this.EXIT; // exit the game
-                break;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
@@ -57,8 +54,78 @@ public class MainMenuView extends MenuView  {
         return false;
     }
 
+    private void startNewGame() {
+        GameControl.createNewGame(LostTeam.getPlayer());
+        
+        GameMenuView gameMenu = new GameMenuView();
+        gameMenu.display();
+    }
+
+    private void startExistingGame() {
+        System.out.println("\n*** startExistingGame function called ***");
+    }
+
+    private void displayHelpMenu() {
+        HelpMenuView helpmenu = new HelpMenuView();
+        helpmenu.display();
+    }
+
+    private void saveGame() {
+        System.out.println("\n*** saveGame function called ***");
+    }
+    
     
     /*
+    private final HelpMenuView helpMenuView;
+    
+    public MainMenuView() {
+        super("\n"
+            + "\n-----------------------------------------"
+            + "\n| Main Menu                             |"
+            + "\n-----------------------------------------"
+            + "\nN - Start New Game"
+            + "\nO - Load Game"
+            + "\nH - Get help on how to play the game"
+            + "\nS - Save Game"
+            + "\nQ - Quit Game"
+            + "\n----------------------------------------",
+        "Q");
+        this.helpMenuView = new HelpMenuView();
+    }
+    
+    protected ReturnValue doAction(String choice) {
+        ReturnValue value = ReturnValue.CONTINUE;
+        
+        switch (choice) {
+            case "N":
+                value = this.startNewGame();
+                break;
+            case "O":
+                value = this.startExistingGame();
+                break;
+            case "H":
+                value = this.helpMenuView.displayMenu();
+                break;
+            case "S":
+                value = this.saveGame();
+                break;
+            case "E":
+                value = ReturnValue.EXIT; // exit the game
+                break;
+            default:
+                System.out.println("\n*** Invalid selection *** Try again");
+                break;
+        }
+        
+        // sub-menu returned "BREAK", but we're the main menu,
+        // so continue the main loop
+        if (value == ReturnValue.BREAK) {
+            value = ReturnValue.CONTINUE;
+        }
+        
+        return value;
+    }
+
     private ReturnValue startNewGame() {
         GameControl.createNewGame(LostTeam.getPlayer());
         
@@ -74,22 +141,7 @@ public class MainMenuView extends MenuView  {
     private ReturnValue saveGame() {
         System.out.println("\n*** saveGame stub function called ***");
         return ReturnValue.CONTINUE;
-    }
+    }   
+}
     */
-
-    private void startNewGame() {
-        Gamecontrol.createNewGame();
-    }
-
-    private void startExistingGame() {
-        System.out.println("\n*** startExistingGame function called ***");
-    }
-
-    private void displayHelpMenu() {
-        System.out.println("\n*** displayHelpMenu function called ***");
-    }
-
-    private void saveGame() {
-        System.out.println("\n*** saveGame function called ***");
-    }
 }
