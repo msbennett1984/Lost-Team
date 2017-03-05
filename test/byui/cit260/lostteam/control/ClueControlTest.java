@@ -372,6 +372,7 @@ public class ClueControlTest {
         /************************
          * Test Case 1 
         ************************/
+        System.out.println("\tcalcTrajectoryDistance()");
         System.out.println("\tTest Case 1 Trajectory");
         
         // input values for test case 1
