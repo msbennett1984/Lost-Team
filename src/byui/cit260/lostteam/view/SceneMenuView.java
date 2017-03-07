@@ -23,6 +23,7 @@ public class SceneMenuView extends MenuView {
             + "\nS - Search Location"
             + "\nT - Talk to Person"
             + "\nP - Player Stats"
+            + "\nU - Test CalcVolumeOfFlaskQuestionView"
             + "\nB - Back to Game Menu"
             + "\n----------------------------------------");
     }
@@ -50,6 +51,9 @@ public class SceneMenuView extends MenuView {
                 break;
             case "B":
                 this.gameMenu();
+                break;
+            case "U":
+                this.calcVolumeOfFlaskQuestion();
                 break;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
@@ -175,4 +179,10 @@ public class SceneMenuView extends MenuView {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     */
+
+    private void calcVolumeOfFlaskQuestion() {
+        CalcVolumeOfFlaskQuestionView calcVolumeOfFlaskQuestion = new CalcVolumeOfFlaskQuestionView();
+        calcVolumeOfFlaskQuestion.display();
+        
+    }
 }

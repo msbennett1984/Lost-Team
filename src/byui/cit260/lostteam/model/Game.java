@@ -6,6 +6,7 @@
 package byui.cit260.lostteam.model;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A game instance object.
@@ -13,11 +14,13 @@ import java.util.Objects;
  * @author adm-achina
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
-public class GameInstance implements Serializable{
-
+public class Game implements Serializable{
+    
     // instance variables
     private Player player;
-    private Inventory inventory;
+    private InventoryItem[] inventory;
+    private Set<Actor> interactions;
+    private Map map;
     private long remainingTime;
 
     public Player getPlayer() {
@@ -28,12 +31,49 @@ public class GameInstance implements Serializable{
         this.player = player;
     }
     
-    public Inventory getInventory() {
+    public InventoryItem[] getInventory() {
         return inventory;
     }
     
-    public void setInventory(Inventory inventory) {
+    public void setInventory(InventoryItem[] inventory) {
         this.inventory = inventory;
+    }
+    
+    public int getInventorySize() {
+        int size = 0;
+        for (InventoryItem i : inventory) {
+            size += i.getQuantity();
+        }
+        return size;
+    }
+    
+    public void addItemToInventory(Item item, int quantity) {
+        InventoryItem i = inventory[item.ordinal()];
+        i.setQuantity(i.getQuantity() + quantity);
+    }
+    
+    public Set<Actor> getInteractions() {
+        return interactions;
+    }
+    
+    public void setInteractions(Set<Actor> interactions) {
+        this.interactions = interactions;
+    }
+    
+    public void addInteraction(Actor actor) {
+        interactions.add(actor);
+    }
+    
+    public boolean hasInteraction(Actor actor) {
+        return interactions.contains(actor);
+    }
+    
+    public Map getMap() {
+        return map;
+    }
+    
+    public void setMap(Map map) {
+        this.map = map;
     }
     
     public long getRemainingTime() {
@@ -67,7 +107,7 @@ public class GameInstance implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GameInstance other = (GameInstance) obj;
+        final Game other = (Game) obj;
         if (this.remainingTime != other.remainingTime) {
             return false;
         }

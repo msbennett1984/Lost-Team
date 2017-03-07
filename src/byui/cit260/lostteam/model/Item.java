@@ -6,94 +6,58 @@
 package byui.cit260.lostteam.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
-public class Item implements Serializable{
+public enum Item implements Serializable {
     
-    //class instance variables
-    private double noItems;
-    private String name;
-    private double requiredAmount;
-
-    //default constructor
-    public Item() {
+    Mushroom("Mushroom", "Mushrooms", 1),
+    Coconut("Coconut", "Coconuts", 1),
+    TicTac("Tic-Tac", "Tic-Tacs", 5),
+    HotDog("Hot Dog", "Hot Dogs", 2),
+    Aspirin("Aspirin", "Aspirin", 10),
+    DeliMeat("Deli Meat", "Deli Meat", 2),
+    BottledWater("Bottled Water", "Bottles of Water", 2),
+    Nutmilk("Nutmilk", "Nutmilk", 2);
+    
+    // class instance variables
+    private final String singularName;
+    private final String pluralName;
+    private final int requiredAmount;
+    
+    Item(String singularName, String pluralName, int requiredAmount) {
+        this.singularName = singularName;
+        this.pluralName = pluralName;
+        if (requiredAmount < 0) {
+            requiredAmount = 0;
+        }
+        this.requiredAmount = requiredAmount;
     }
     
-    //getters and setters
-    public double getNoItems() {
-        return noItems;
+    public String getName(int quantity) {
+        if (quantity == 1) {
+            return singularName;
+        } else {
+            return pluralName;
+        }
     }
 
-    public void setNoItems(double noItems) {
-        this.noItems = noItems;
+    public String getSingularName() {
+        return singularName;
     }
-
-    public String getName() {
-        return name;
+    
+    public String getPluralName() {
+        return pluralName;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getRequiredAmount() {
+    
+    public int getRequiredAmount() {
         return requiredAmount;
     }
 
-    public void setRequiredAmount(double requiredAmount) {
-        this.requiredAmount = requiredAmount;
-    }
-
-    
-    //hashcode function
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.noItems);
-        hash = 41 * hash + Objects.hashCode(this.name);
-        hash = 41 * hash + (int) (Double.doubleToLongBits(this.requiredAmount) ^ (Double.doubleToLongBits(this.requiredAmount) >>> 32));
-        return hash;
-    }
-
-    //toString function
     @Override
     public String toString() {
-        return "Item{" + "noItems=" + noItems + ", name=" + name + ", requiredAmount=" + requiredAmount + '}';
+        return "Item{" + "singularName=" + singularName + ", pluralName=" + pluralName + ", requiredAmount=" + requiredAmount + '}';
     }
-
-    
-    //equals funciton
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Item other = (Item) obj;
-        if (Double.doubleToLongBits(this.requiredAmount) != Double.doubleToLongBits(other.requiredAmount)) {
-            return false;
-        }
-        if (!Objects.equals(this.noItems, other.noItems)) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
-    
-    
-    }
-    
-    
-    
-    
 }

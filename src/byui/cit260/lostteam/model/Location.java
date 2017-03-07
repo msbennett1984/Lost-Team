@@ -17,6 +17,8 @@ public class Location implements Serializable {
     private int row;
     private int column;
     private boolean visited;
+    private Scene scene;
+    private Actor actor; // only one actor per location
     
     // default constructor function
     public Location() {
@@ -45,6 +47,22 @@ public class Location implements Serializable {
 
     public void setVisited(boolean visited) {
         this.visited = visited;
+    }
+    
+    public Scene getScene() {
+        return scene;
+    }
+    
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+    
+    public Actor getActor() {
+        return actor;
+    }
+    
+    public void setActor(Actor actor) {
+        this.actor = actor;
     }
 
     // hashcode function

@@ -18,11 +18,15 @@ public class InventoryItem implements Serializable {
     
     public InventoryItem(Item item) {
         this.item = item;
-        this.quantity = 1;
+        this.quantity = 0;
     }
     
     public Item getItem() {
         return item;
+    }
+    
+    public String getItemName() {
+        return item.getName(quantity);
     }
     
     public int getQuantity() {
@@ -31,7 +35,7 @@ public class InventoryItem implements Serializable {
     
     public void setQuantity(int quantity) {
         if (quantity <= 0) {
-            quantity = 1;
+            quantity = 0;
         }
         this.quantity = quantity;
     }

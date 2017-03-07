@@ -5,8 +5,7 @@
  */
 package byui.cit260.lostteam.view;
 
-import byui.cit260.lostteam.model.GameInstance;
-import byui.cit260.lostteam.model.Inventory;
+import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
 import java.util.ArrayList;
 import lostteam.LostTeam;
@@ -29,9 +28,8 @@ public class AntidoteMenuView extends MenuView {
     }
     
     protected void beforeGetInput() {
-        GameInstance game = LostTeam.getCurrentGame();
-        ArrayList<InventoryItem> items = game.getInventory().getItems();
-        int size = items.size();
+        Game game = LostTeam.getCurrentGame();
+        int size = game.getInventorySize();
         String itemsLabel = "items";
         if (size == 1) {
             itemsLabel = "item";
@@ -44,8 +42,8 @@ public class AntidoteMenuView extends MenuView {
                          + "\n*****************************************");
         if (size > 0) {
             System.out.println("\nInventory items:");
-            for (int i = 0; i < size; i++) {
-                System.out.println("  " + items.get(i).getQuantity() + " - " + items.get(i).getItem().getName());
+            for (InventoryItem i : game.getInventory()) {
+                System.out.println("  " + i.getQuantity() + " - " + i.getItemName());
             }
         }
         return;
@@ -75,7 +73,7 @@ public class AntidoteMenuView extends MenuView {
     private void createAntidote() {
         System.out.println("Attempting to create antidote...");
         System.out.println("FAILED");
-        GameInstance game = LostTeam.getCurrentGame();
+        Game game = LostTeam.getCurrentGame();
         game.setRemainingTime(game.getRemainingTime() - 15);
         return;
     }
@@ -98,7 +96,7 @@ public class AntidoteMenuView extends MenuView {
     }
     
     protected void beforeGetInput() {
-        GameInstance game = LostTeam.getCurrentGame();
+        Game game = LostTeam.getCurrentGame();
         ArrayList<InventoryItem> items = game.getInventory().getItems();
         int size = items.size();
         String itemsLabel = "items";
@@ -152,7 +150,7 @@ public class AntidoteMenuView extends MenuView {
     private ReturnValue createAntidote() {
         System.out.println("Attempting to create antidote...");
         System.out.println("FAILED");
-        GameInstance game = LostTeam.getCurrentGame();
+        Game game = LostTeam.getCurrentGame();
         game.setRemainingTime(game.getRemainingTime() - 15);
         return ReturnValue.CONTINUE;
     }

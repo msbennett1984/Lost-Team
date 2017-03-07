@@ -51,6 +51,7 @@ public abstract class MenuView implements ViewInterface {
         
         
         while(!valid) {
+            this.beforeGetInput();
             System.out.println(this.displayMessage);
             value = keyboard.nextLine();
             value = value.trim();
@@ -61,6 +62,10 @@ public abstract class MenuView implements ViewInterface {
             break;
         }
         return value.toUpperCase(); // return the value entered
+    }
+        
+    protected void beforeGetInput() {
+        return;
     }
 
     /*
