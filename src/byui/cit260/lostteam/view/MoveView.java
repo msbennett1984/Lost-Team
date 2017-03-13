@@ -5,6 +5,11 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Game;
+import byui.cit260.lostteam.model.Location;
+import byui.cit260.lostteam.model.Map;
+import lostteam.LostTeam;
+
 /**
  *
  * @author adm-achina
@@ -23,6 +28,7 @@ public class MoveView extends MenuView{
             + "\n   S - South"
             + "\n   E - East"
             + "\n   W - West"
+            + "\n   V - View Map"     
             + "\n   Q - Quit Game"
             + "\n----------------------------------------");     
     }
@@ -44,6 +50,9 @@ public class MoveView extends MenuView{
                 break;
             case "W": //West
                 this.west();
+                break;
+            case "V": //View Map
+                this.viewMap();
                 break;
             default:
                 System.out.println("\n*** Invalid Selection *** Try again");
@@ -79,6 +88,22 @@ public class MoveView extends MenuView{
 
     private void GameControl() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void viewMap() {
+        StringBuilder line;
+        
+        Game game = LostTeam.getCurrentGame();
+        Map map = game.getMap();
+
+        
+        System.out.println("***                   Map                    ***");
+        line = new StringBuilder("                                          ");
+       
+        //
+        //for(Location location : map){
+            
+        //}
     }
 
       

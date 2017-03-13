@@ -15,72 +15,74 @@ import java.util.Objects;
 public class Scene implements Serializable {
     
     
+    
     //class instance variables
     private String description;
     private String signSymbol;
+    private int coordinates;
+    
     //private String name;
 
    
      // constructor function
-    public Scene() {
+    Scene(String description, String signSymbol, int coordinates) {
+        this.description = description;
+        this.signSymbol = signSymbol;
+        this.coordinates = coordinates;
     }
 
-    
-    
-    // getters and setters
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getSignSymbol() {
         return signSymbol;
     }
 
+    public int getCoordinates() {
+        return coordinates;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setSignSymbol(String signSymbol) {
         this.signSymbol = signSymbol;
     }
-    
-    
-    //hasCode Func.
+
+    public void setCoordinates(int coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.signSymbol);
-        return hash;
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
     }
 
-        
-    @Override
-    public String toString() {
-        return "Scene{" + "description=" + description + ", signSymbol=" + signSymbol + '}';
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Scene other = (Scene) obj;
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.signSymbol, other.signSymbol)) {
-            return false;
-        }
-        return true;
+    public Scene() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-        
-    
-    
     
 }

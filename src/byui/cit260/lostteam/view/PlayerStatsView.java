@@ -5,7 +5,10 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Game;
+import byui.cit260.lostteam.model.InventoryItem;
 import java.util.Scanner;
+import lostteam.LostTeam;
 
 /**
  *
@@ -60,7 +63,28 @@ public class PlayerStatsView extends MenuView {
     }
 
     private void itemInventory() {
-        System.out.println("*** ItemInventory function called ***");
+        StringBuilder line;
+        
+        Game game = LostTeam.getCurrentGame();
+        InventoryItem[] inventory = game.getInventory();
+        
+        System.out.println("\n    Item Inventory   ");
+        line = new StringBuilder("                                       ");
+        line.insert(0, "Description");
+        line.insert(20, "In Stock");
+        System.out.println(line.toString());
+        
+        // for each inventory item
+        for (InventoryItem item : inventory){
+            
+            line = new StringBuilder("                                    ");
+            line.insert(0, item.getItemName());
+            line.insert(20, item.getQuantity());
+            
+            //displays it to the line
+            System.out.println(line.toString());
+        }
+        
     }
 
     private void locationsVisited() {
