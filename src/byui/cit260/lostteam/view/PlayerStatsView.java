@@ -5,6 +5,8 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Actor;
+import byui.cit260.lostteam.model.ActorType;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
 import java.util.Scanner;
@@ -59,7 +61,30 @@ public class PlayerStatsView extends MenuView {
     }
     
     private void peopleSpokenTo() {
-        System.out.println("*** PeopleSpokenTo function called ***");
+        //declare the variable for StringBuilder type
+        StringBuilder sentence;
+        
+        // variable game is assigned the value of getting the current game
+        Game game = LostTeam.getCurrentGame();
+        ActorType[] type = game.getType();
+        
+        System.out.println          ("\n          People Spoken To           ");
+        //45 spots
+        sentence = new StringBuilder("                                       ");
+        sentence.insert(0, "Person");
+        sentence.insert(20, "Clue Given");
+        
+        //For each loop Actor
+        for (ActorType actor : type){
+            
+            sentence = new StringBuilder("                                       ");
+            sentence.insert(0, actor.getDescription());
+            sentence.insert(20, actor.getClueGiven());
+            
+            System.out.println(sentence.toString());
+            
+        }
+        
     }
 
     private void itemInventory() {
@@ -68,7 +93,7 @@ public class PlayerStatsView extends MenuView {
         Game game = LostTeam.getCurrentGame();
         InventoryItem[] inventory = game.getInventory();
         
-        System.out.println("\n    Item Inventory   ");
+        System.out.println("\n                  Item Inventory   ");
         line = new StringBuilder("                                       ");
         line.insert(0, "Description");
         line.insert(20, "In Stock");

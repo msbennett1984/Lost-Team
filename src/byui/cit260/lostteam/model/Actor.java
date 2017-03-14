@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public enum Actor implements Serializable {
     
+    
     Scientist       ("Scientist",        0, 0, "TODO: An ingredient list, a list of ingredients without the quantity"),
     Senator         ("Idaho Senator",    1, 0, "TODO: senator clue"),
     TicketSeller    ("Ticker Seller",    2, 0, "TODO: ticket clue"),
@@ -70,4 +71,5 @@ public enum Actor implements Serializable {
     public String toString() {
         return "Actor{" + "description=" + description + ", coordinates=" + coordinates + ", clueGiven=" + clueGiven + '}';
     }
+
 }

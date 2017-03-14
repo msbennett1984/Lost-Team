@@ -20,6 +20,7 @@ public class Game implements Serializable{
     private Player player;
     private InventoryItem[] inventory;
     private Set<Actor> interactions;
+    private ActorType[] type;
     private Map map;
     private long remainingTime;
 
@@ -51,6 +52,7 @@ public class Game implements Serializable{
         InventoryItem i = inventory[item.ordinal()];
         i.setQuantity(i.getQuantity() + quantity);
     }
+
     
     public Set<Actor> getInteractions() {
         return interactions;
@@ -67,6 +69,15 @@ public class Game implements Serializable{
     public boolean hasInteraction(Actor actor) {
         return interactions.contains(actor);
     }
+
+    public ActorType[] getType() {
+        return type;
+    }
+
+    public void setType(ActorType[] type) {
+        this.type = type;
+    }
+
     
     public Map getMap() {
         return map;
