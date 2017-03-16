@@ -5,6 +5,7 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.control.MapControl;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
@@ -27,9 +28,8 @@ public class MoveView extends MenuView{
             + "\n   N - North"
             + "\n   S - South"
             + "\n   E - East"
-            + "\n   W - West"
-            + "\n   V - View Map"     
-            + "\n   Q - Quit Game"
+            + "\n   W - West"    
+            + "\n   E - Return to Game Menu"
             + "\n----------------------------------------");     
     }
     
@@ -40,20 +40,13 @@ public class MoveView extends MenuView{
         
         switch (Menu) {
             case "N": //North
-                this.north();
-                break;
+                return this.north();
             case "S": //South
-                this.south();
-                break;
+                return this.south();
             case "E": //East
-                this.east();
-                break;
+               return this.east();
             case "W": //West
-                this.west();
-                break;
-            case "V": //View Map
-                this.viewMap();
-                break;
+                return this.west();
             default:
                 System.out.println("\n*** Invalid Selection *** Try again");
                 break;
@@ -61,50 +54,54 @@ public class MoveView extends MenuView{
         return false;
     }
 
-    private void north() {     
+    private boolean north() {     
+        Game game = LostTeam.getCurrentGame(); // retreive the game
+        Map map = game.getMap(); // retreive the map from game
         
-        System.out.println("***You have chosen North***");
-        open();
+        if(map.getCurrentRow() == 0){
+            System.out.println("Cannot go any further North, must choose alternate direction");
+            return false;
+        }else{
+            MapControl.movePlayer(map, map.getCurrentRow() - 1, map.getCurrentColumn());
+        }
+       return true;
     }
-    private void south() {
+    private boolean south() {
+        Game game = LostTeam.getCurrentGame(); // retreive the game
+        Map map = game.getMap(); // retreive the map from game
         
-        System.out.println("***You have chosen South***");
-        open();
+        if(map.getCurrentRow() == map.getRowCount()-1){
+            System.out.println("Cannot go any further South, must choose alternate direction");
+            return false;
+        }else{
+            MapControl.movePlayer(map, map.getCurrentRow() + 1, map.getCurrentColumn());
+        }
+        return true;
     }
-     private void east() {
+     private boolean east() {
+        Game game = LostTeam.getCurrentGame(); // retreive the game
+        Map map = game.getMap(); // retreive the map from game
         
-        System.out.println("***You have chosen East***");
-        open();
-    }
-      private void west() {
-        
-        System.out.println("***You have chosen West***");
-        open();
-    }
-      
-      private void open() {
-        GameControl();
-      }
-
-    private void GameControl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void viewMap() {
-        StringBuilder line;
-        
-        Game game = LostTeam.getCurrentGame();
-        Map map = game.getMap();
-
-        
-        System.out.println("***                   Map                    ***");
-        line = new StringBuilder("                                          ");
-       
-        //
-        //for(Location location : map){
-            
-        //}
+        if(map.getCurrentColumn() == map.getColumnCount()-1){
+            System.out.println("Cannot go any further East, must choose alternate direction");
+            return false;
+        }else{
+            MapControl.movePlayer(map, map.getCurrentRow(), map.getCurrentColumn() + 1);
+        }
+        return true;
     }
 
-      
+    private boolean west() {
+        Game game = LostTeam.getCurrentGame(); // retreive the game
+        Map map = game.getMap(); // retreive the map from game
+        
+        if(map.getCurrentColumn() == 0){
+            System.out.println("Cannot go any further West, must choose alternate direction");
+            return false;
+        }else{
+            MapControl.movePlayer(map, map.getCurrentRow(), map.getCurrentColumn() - 1);
+        }
+        return true;
+    }
+    
 }

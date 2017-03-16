@@ -30,7 +30,7 @@ public abstract class MenuView implements ViewInterface {
             // prompt for and get user's input
             String value = this.getInput();
             //user wants to quit
-            if(value.toUpperCase().equals("E")){
+            if(value.toUpperCase().equals("Q")){
                 // exits the view
                 return;
             }

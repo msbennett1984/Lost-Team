@@ -21,6 +21,7 @@ public class Map implements Serializable {
     private int currentColumn;
     private String currentScene;
     private Location[][] locations;
+    private Location currentLocation;
 
     // constructor function
     public Map() {
@@ -104,6 +105,14 @@ public class Map implements Serializable {
     
     public Location[][] getLocations() {
         return locations;
+    }
+
+    public Location getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
     // hashcode function

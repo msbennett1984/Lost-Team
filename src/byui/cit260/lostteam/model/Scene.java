@@ -20,7 +20,8 @@ public class Scene implements Serializable {
     private String description;
     private String signSymbol;
     private int coordinates;
-    
+    private Actor actor;
+    private Clue clue;
     //private String name;
 
    
@@ -55,6 +56,24 @@ public class Scene implements Serializable {
         this.coordinates = coordinates;
     }
 
+    public Actor getActor() {
+        return actor;
+    }
+
+    public void setActor(Actor actor) {
+        this.actor = actor;
+    }
+
+    public Clue getClue() {
+        return clue;
+    }
+
+    public void setClue(Clue clue) {
+        this.clue = clue;
+    }
+    
+    
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
@@ -81,7 +100,7 @@ public class Scene implements Serializable {
     }
 
     public Scene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     

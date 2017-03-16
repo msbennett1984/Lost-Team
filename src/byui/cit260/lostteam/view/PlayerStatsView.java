@@ -68,14 +68,14 @@ public class PlayerStatsView extends MenuView {
         Game game = LostTeam.getCurrentGame();
         ActorType[] type = game.getType();
         
-        System.out.println          ("\n          People Spoken To           ");
+        System.out.println          ("\n          Actors           ");
         //45 spots
         sentence = new StringBuilder("                                       ");
         sentence.insert(0, "Person");
         sentence.insert(20, "Clue Given");
         
         //For each loop Actor
-        for (ActorType actor : type){
+        for (Actor actor : Actor.values()){
             
             sentence = new StringBuilder("                                       ");
             sentence.insert(0, actor.getDescription());
@@ -84,7 +84,7 @@ public class PlayerStatsView extends MenuView {
             System.out.println(sentence.toString());
             
         }
-        
+        System.out.println("Total number of actors is " + Actor.values().length);
     }
 
     private void itemInventory() {
