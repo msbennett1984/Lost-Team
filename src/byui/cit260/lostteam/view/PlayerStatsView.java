@@ -9,7 +9,11 @@ import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.ActorType;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
+import byui.cit260.lostteam.model.Location;
+import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Navigation;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 import lostteam.LostTeam;
 
@@ -113,7 +117,35 @@ public class PlayerStatsView extends MenuView {
     }
 
     private void locationsVisited() {
-        System.out.println("*** LocationsVisited function called ***");
+        Game game = LostTeam.getCurrentGame(); // retreive the game
+        Map map = game.getMap(); // retreive the map from game
+        Location[][] locations = map.getLocations(); // retreive the locations from map
+        ArrayList<Location> visitedLocations = new ArrayList<>();
+        
+        for (int row = 0; row < locations.length; row++) {
+            for (int column = 0; column < locations[row].length; column++) {
+                Location location = locations[row][column];
+                if (location.isVisited()) {
+                    visitedLocations.add(location);
+                }
+            }
+        }
+        
+        System.out.println("\n         Locations Visited         \n");
+        
+        if (visitedLocations.isEmpty()) {
+            System.out.println("*** You haven't visited anywhere yet. ***");
+            return;
+        }
+
+        visitedLocations.sort(
+            (l1, l2) ->
+                l1.getScene().getDescription().compareTo(l2.getScene().getDescription())
+        );
+        for (Location location : visitedLocations) {
+            System.out.println(location.getScene().getDescription()
+                + " (" + location.getScene().getSignSymbol() + ")");
+        }
     }
 
     private void timeRemaining() {

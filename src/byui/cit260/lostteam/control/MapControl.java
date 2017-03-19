@@ -230,6 +230,5 @@ public class MapControl {
         map.getCurrentLocation().setVisited(true);
         map.setCurrentRow(row);
         map.setCurrentColumn(column);
-
     }
 }
