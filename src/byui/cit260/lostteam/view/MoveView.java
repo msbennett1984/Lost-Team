@@ -6,6 +6,7 @@
 package byui.cit260.lostteam.view;
 
 import byui.cit260.lostteam.control.MapControl;
+import byui.cit260.lostteam.exception.MapControlException;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
@@ -76,7 +77,12 @@ public class MoveView extends MenuView{
             System.out.println("Cannot go any further North, must choose alternate direction");
             return false;
         }else{
-            MapControl.movePlayer(map, map.getCurrentRow() - 1, map.getCurrentColumn());
+            try {
+                MapControl.movePlayerToLocation(map.getCurrentRow() - 1, map.getCurrentColumn());
+            } catch (MapControlException me) {
+                System.out.println(me.getMessage());
+                return false;
+            }
         }
        return true;
     }
@@ -88,7 +94,12 @@ public class MoveView extends MenuView{
             System.out.println("Cannot go any further South, must choose alternate direction");
             return false;
         }else{
-            MapControl.movePlayer(map, map.getCurrentRow() + 1, map.getCurrentColumn());
+            try {
+                MapControl.movePlayerToLocation(map.getCurrentRow() + 1, map.getCurrentColumn());
+            } catch (MapControlException me) {
+                System.out.println(me.getMessage());
+                return false;
+            }
         }
         return true;
     }
@@ -100,7 +111,12 @@ public class MoveView extends MenuView{
             System.out.println("Cannot go any further East, must choose alternate direction");
             return false;
         }else{
-            MapControl.movePlayer(map, map.getCurrentRow(), map.getCurrentColumn() + 1);
+            try {
+                MapControl.movePlayerToLocation(map.getCurrentRow(), map.getCurrentColumn() + 1);
+            } catch (MapControlException me) {
+                System.out.println(me.getMessage());
+                return false;
+            }
         }
         return true;
     }
@@ -113,7 +129,12 @@ public class MoveView extends MenuView{
             System.out.println("Cannot go any further West, must choose alternate direction");
             return false;
         }else{
-            MapControl.movePlayer(map, map.getCurrentRow(), map.getCurrentColumn() - 1);
+            try {
+                MapControl.movePlayerToLocation(map.getCurrentRow(), map.getCurrentColumn() - 1);
+            } catch (MapControlException me) {
+                System.out.println(me.getMessage());
+                return false;
+            }
         }
         return true;
     }

@@ -5,11 +5,14 @@
  */
 package byui.cit260.lostteam.control;
 
+import byui.cit260.lostteam.exception.MapControlException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
+import byui.cit260.lostteam.model.Point;
 import byui.cit260.lostteam.model.Scene;
 import byui.cit260.lostteam.model.SceneType;
+import lostteam.LostTeam;
 
 /**
  *
@@ -224,8 +227,22 @@ public class MapControl {
         // If starting location is not supposed to be 0,0 then use the correct values here.
         movePlayer(map, 0, 0);
     }
-
-    public static void movePlayer(Map map, int row, int column) {
+    
+    public static void movePlayerToLocation(int row, int column) throws MapControlException {
+        Map map = LostTeam.getCurrentGame().getMap();
+        
+        if (row < 0 || row >= map.getRowCount() ||
+            column < 0 || column >= map.getColumnCount()) {
+            throw new MapControlException("Can not move player to location "
+                                        + row + ", " + column
+                                        + " because that location is outside"
+                                        + " the bounds of the map.");
+        }
+        
+        movePlayer(map, row, column);
+    }
+    
+    private static void movePlayer(Map map, int row, int column) {
         map.setCurrentLocation(map.getLocations()[row][column]);
         map.getCurrentLocation().setVisited(true);
         map.setCurrentRow(row);
