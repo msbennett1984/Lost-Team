@@ -9,6 +9,7 @@ import byui.cit260.lostteam.control.MapControl;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
+import byui.cit260.lostteam.model.Navigation;
 import lostteam.LostTeam;
 
 /**
@@ -20,7 +21,7 @@ public class MoveView extends MenuView{
     //private final String promptMessage;
     //private final String menu;
     
-    public MoveView() {
+    public MoveView(String parentName) {
          super("\n"
             + "\n-----------------------------------------"
             + "\n|          Movement                      |"
@@ -29,29 +30,42 @@ public class MoveView extends MenuView{
             + "\n   S - South"
             + "\n   E - East"
             + "\n   W - West"    
-            + "\n   E - Return to Game Menu"
+            + "\n   B - Back to " + parentName
             + "\n----------------------------------------");     
     }
     
   
     @Override
-    public boolean doAction(String Menu) {
-        Menu = Menu.toUpperCase(); //convert to uppercase
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
+        boolean moved = false;
         
-        switch (Menu) {
+        switch (choice) {
             case "N": //North
-                return this.north();
+                moved = this.north();
+                break;
             case "S": //South
-                return this.south();
+                moved = this.south();
+                break;
             case "E": //East
-               return this.east();
+                moved = this.east();
+                break;
             case "W": //West
-                return this.west();
+                moved = this.west();
+                break;
+            case "B":
+                // Back to Game or Scene Menu (immediately)
+                return Navigation.ExitView;
             default:
                 System.out.println("\n*** Invalid Selection *** Try again");
                 break;
         }
-        return false;
+
+        if (moved) {
+            return Navigation.ExitView;
+        }
+        
+        return nav;
     }
 
     private boolean north() {     

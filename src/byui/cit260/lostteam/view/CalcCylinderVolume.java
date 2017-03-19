@@ -5,14 +5,15 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Navigation;
+
 /**
  *
  * @author Dallin Barlow
  */
 public class CalcCylinderVolume extends MenuView {
-    
 
-    public CalcCylinderVolume(){
+    public CalcCylinderVolume() {
         super( "\n                                                 "
         + "\n-------------------------------------------------------"
         + "\nA police officer is investigating the scene of a crime "
@@ -26,28 +27,24 @@ public class CalcCylinderVolume extends MenuView {
 
         
     }
+
     @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "S":
                 this.answerQuestion();
                 break;
             case "B":
-                this.sceneMenu();
-                break;
+                // Back to Scene Menu (immediately)
+                return Navigation.ExitView;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-        return false;
-    }
 
-    private void sceneMenu() {
-        SceneMenuView sceneMenu = new SceneMenuView();
-        sceneMenu.display();
+        return nav;
     }
 
     private void answerQuestion() {

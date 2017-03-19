@@ -5,6 +5,8 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Navigation;
+
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
@@ -26,30 +28,25 @@ public class CalcVolumeOfFlaskQuestionView extends MenuView {
         + "\nN - No I will not help (back to Scene Menu)            ");
     }
     @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "Y":
                 this.answerQuestion();
                 break;
             case "N":
-                this.sceneMenu();
-                break;
+                // Back to Scene Menu (immediately)
+                return Navigation.ExitView;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-        return false;
+
+        return nav;
     } 
 
     private void answerQuestion() {
         System.out.println("\n*** AnswerQuestion Function called ***");
-    }
-
-    private void sceneMenu() {
-        SceneMenuView sceneMenu = new SceneMenuView();
-        sceneMenu.display();
     }
 }

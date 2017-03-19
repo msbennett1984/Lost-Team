@@ -5,14 +5,16 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Navigation;
+
 /**
  *
  * @author Dallin Barlow
  */
 public interface ViewInterface {
-    
-    public void display();
+
+    public Navigation display();
     public String getInput();
-    public boolean doAction(String value);
-    
+    public Navigation doAction(String value);
+
 }

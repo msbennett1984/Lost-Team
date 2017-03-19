@@ -9,6 +9,7 @@ import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.ActorType;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
+import byui.cit260.lostteam.model.Navigation;
 import java.util.Scanner;
 import lostteam.LostTeam;
 
@@ -31,10 +32,9 @@ public class PlayerStatsView extends MenuView {
             + "\n-----------------------------------------");
    }
    
-   @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    @Override
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "P":
@@ -50,14 +50,14 @@ public class PlayerStatsView extends MenuView {
                 this.timeRemaining();
                 break;
             case "B":
-                this.sceneMenu();
-                break;
+                // Back to Scene Menu (immediately)
+                return Navigation.ExitView;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-      
-        return false;
+
+        return nav;
     }
     
     private void peopleSpokenTo() {
@@ -119,79 +119,4 @@ public class PlayerStatsView extends MenuView {
     private void timeRemaining() {
         System.out.println("*** TimeRemaining function called ***");
     }
-
-    private void sceneMenu() {
-        SceneMenuView sceneMenu = new SceneMenuView();
-        sceneMenu.display();
-    }
-    
-    
-    
-    /*   
-    public PlayerStatsView() {
-        super("\n"
-            + "\n-----------------------------------------"
-            + "\n|             Player Stats              |"
-            + "\n-----------------------------------------"
-            + "\nP - People Spoken To (Clues)             "
-            + "\nI - Item Inventory                       "
-            + "\nL - Locations Visited                    "
-            + "\nT - Time Remaining                       "
-            + "\nB - Back to Scene Menu                   "
-            + "\n-----------------------------------------",
-        null);
-    }
-
-    protected ReturnValue doAction(String choice) {
-        ReturnValue value = ReturnValue.CONTINUE;
-        boolean ignoreBreak = true;
- 
-        switch (choice) {
-            case "P":
-                    value = this.peopleSpokenTo();
-                break;
-            case "I":
-                value = this.itemInventory();
-                break;
-            case "L":
-                value = this.locationsVisited();
-                break;
-            case "T":
-                value = this.timeRemaining();
-                break;                
-            case "B":
-                value = ReturnValue.BREAK;
-                ignoreBreak = false;
-                break;
-            default:
-                System.out.println("\n*** Invalid selection *** Try again");
-                break;
-        }
-        
-        // for certain sub-menus (like PlayerStatsMenu), we don't want to
-        // return to the main menu, but to stop here
-        if (ignoreBreak == true && value == ReturnValue.BREAK) {
-            value = ReturnValue.CONTINUE;
-        }
-        
-        return value;
-    }  
-
-    private ReturnValue locationsVisited() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private ReturnValue timeRemaining() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private ReturnValue itemInventory() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private ReturnValue peopleSpokenTo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/
-
 }

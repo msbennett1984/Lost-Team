@@ -7,12 +7,13 @@ package byui.cit260.lostteam.view;
 
 import lostteam.LostTeam;
 import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.model.Navigation;
 
 /**
  *
  * @author Dallin Barlow
  */
-public class MainMenuView extends MenuView  {
+public class MainMenuView extends MenuView {
 
     
     public MainMenuView() {
@@ -29,119 +30,57 @@ public class MainMenuView extends MenuView  {
     }
     
     @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "N":
-                this.startNewGame();
+                nav = this.startNewGame();
                 break;
             case "O":
-                this.startExistingGame();
+                nav = this.startExistingGame();
                 break;
             case "H":
-                this.displayHelpMenu();
+                nav = this.displayHelpMenu();
                 break;
             case "S":
-                this.saveGame();
-                break;
-            default:
-                System.out.println("\n*** Invalid selection *** Try again");
-                break;
-        }
-      
-        return false;
-    }
-
-    private void startNewGame() {
-        GameControl.createNewGame(LostTeam.getPlayer());
-        
-        GameMenuView gameMenu = new GameMenuView();
-        gameMenu.display();
-    }
-
-    private void startExistingGame() {
-        System.out.println("\n*** startExistingGame function called ***");
-    }
-
-    private void displayHelpMenu() {
-        HelpMenuView helpmenu = new HelpMenuView();
-        helpmenu.display();
-    }
-
-    private void saveGame() {
-        System.out.println("\n*** saveGame function called ***");
-    }
-    
-    
-    /*
-    private final HelpMenuView helpMenuView;
-    
-    public MainMenuView() {
-        super("\n"
-            + "\n-----------------------------------------"
-            + "\n| Main Menu                             |"
-            + "\n-----------------------------------------"
-            + "\nN - Start New Game"
-            + "\nO - Load Game"
-            + "\nH - Get help on how to play the game"
-            + "\nS - Save Game"
-            + "\nQ - Quit Game"
-            + "\n----------------------------------------",
-        "Q");
-        this.helpMenuView = new HelpMenuView();
-    }
-    
-    protected ReturnValue doAction(String choice) {
-        ReturnValue value = ReturnValue.CONTINUE;
-        
-        switch (choice) {
-            case "N":
-                value = this.startNewGame();
-                break;
-            case "O":
-                value = this.startExistingGame();
-                break;
-            case "H":
-                value = this.helpMenuView.displayMenu();
-                break;
-            case "S":
-                value = this.saveGame();
+                nav = this.saveGame();
                 break;
             case "E":
-                value = ReturnValue.EXIT; // exit the game
-                break;
+                // Exit Game (immediately)
+                return Navigation.ExitGame;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
         
-        // sub-menu returned "BREAK", but we're the main menu,
-        // so continue the main loop
-        if (value == ReturnValue.BREAK) {
-            value = ReturnValue.CONTINUE;
+        // Stop exiting view and continue with this view
+        if (nav == Navigation.ExitView) {
+            nav = Navigation.Continue;
         }
-        
-        return value;
+      
+        return nav;
     }
 
-    private ReturnValue startNewGame() {
+    private Navigation startNewGame() {
         GameControl.createNewGame(LostTeam.getPlayer());
         
         GameMenuView gameMenu = new GameMenuView();
-        return gameMenu.displayMenu();
+        return gameMenu.display();
     }
 
-    private ReturnValue startExistingGame() {
-        System.out.println("\n*** startExistingGame stub function called ***");
-        return ReturnValue.CONTINUE;
+    private Navigation startExistingGame() {
+        System.out.println("\n*** startExistingGame function called ***");
+        return Navigation.Continue;
     }
 
-    private ReturnValue saveGame() {
-        System.out.println("\n*** saveGame stub function called ***");
-        return ReturnValue.CONTINUE;
-    }   
-}
-    */
+    private Navigation displayHelpMenu() {
+        HelpMenuView helpmenu = new HelpMenuView();
+        return helpmenu.display();
+    }
+
+    private Navigation saveGame() {
+        System.out.println("\n*** saveGame function called ***");
+        return Navigation.Continue;
+    }
 }

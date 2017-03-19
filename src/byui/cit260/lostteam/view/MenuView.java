@@ -5,6 +5,7 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Navigation;
 import java.util.Scanner;
 
 /**
@@ -15,118 +16,56 @@ public abstract class MenuView implements ViewInterface {
     
     protected String displayMessage;
     
-    public MenuView(){
-    }
-    
-    public MenuView(String message){
+    public MenuView(String message) {
         this.displayMessage = message;
     }
     
     @Override
-    public void display(){
-        
-        boolean done = false;
-        do{
+    public Navigation display() {
+        Navigation nav = Navigation.Continue;
+        do {
             // prompt for and get user's input
-            String value = this.getInput();
-            //user wants to quit
-            if(value.toUpperCase().equals("Q")){
-                // exits the view
-                return;
-            }
-            
-            // does the requested action and displays the next view
-            done = this.doAction(value);
-        }
-        // exit the view when done == true
-        while(!done);
-        
+            String choice = this.getInput();
+//            // user wants to quit
+//            if (choice.equals("Q")) {
+//                // exit the view
+//                return Navigation.ExitView;
+//            }
+            // does the requested action and (possibly) displays the next view
+            nav = this.doAction(choice);
+        } while (nav == Navigation.Continue);
+        // exit once nav does not equal continue
+        return nav;
+    }
+    
+    /**
+     * Override this method in child classes to display something before
+     * the displayMessage is shown while gathering input.
+     */
+    protected void beforeGetInput() {
+        return;
     }
     
     @Override
-        public String getInput() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
-        String value = null; // value to be returned
-        boolean valid = false; // initialize to not valid
-        
-        
-        while(!valid) {
-            this.beforeGetInput();
-            System.out.println(this.displayMessage);
-            value = keyboard.nextLine();
-            value = value.trim();
-            
-            if (value == null || value.length() == 0) {
-                System.out.println("Invalid input please input a correct character");
-            }
-            break;
-        }
-        return value.toUpperCase(); // return the value entered
-    }
-        
-    protected void beforeGetInput() {
-        return;
-    }
-
-    /*
-    public enum ReturnValue {
-        CONTINUE,
-        BREAK,
-        EXIT
-    }
-    
-    private String menu;
-    private final String exit;
-
-    public MenuView(String menu, String exit) {
-        this.menu = menu;
-        this.exit = exit;
-    }
-    
-    public ReturnValue displayMenu() {
-        ReturnValue value = ReturnValue.CONTINUE;
-        do {
-            String choice = this.getInput();
-            if (this.exit != null && choice.equals(this.exit)) {
-                value = ReturnValue.EXIT;
-                return value;
-            }
-            value = this.doAction(choice);
-        } while (value == ReturnValue.CONTINUE);
-        return value;
-    }
-    
-    protected void beforeGetInput() {
-        return;
-    }
-    
-    private String getInput() {
+    public String getInput() {
         Scanner keyboard = new Scanner(System.in); // get infile for keyboard
         String value = ""; // value to be returned
         boolean valid = false; // initialize to not valid
         
-        while (!valid) { // loop while an invalid value is entered
+        while (!valid) { // loop until a valid value is entered
             this.beforeGetInput();
-            System.out.println("\n" + this.menu);
+            System.out.println(this.displayMessage);
             
             value = keyboard.nextLine(); // get next line typed on keyboard
             value = value.trim(); // trim off leading and trailing blanks
             
-            if (value.length() < 1) {
-                System.out.println("\nInvalid value: value cannot be blank");
-                continue;
+            if (value.isEmpty()) {
+                System.out.println("Invalid input please input a correct character");
+            } else {
+                valid = true;
             }
-            
-            valid = true;
-            break; // end the loop
         }
         
         return value.toUpperCase(); // return the value entered
     }
-    
-    protected ReturnValue doAction(String choice) {
-        throw new UnsupportedOperationException("Not implemented yet.");
-    }
-
-*/
 }

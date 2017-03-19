@@ -5,13 +5,13 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.model.Navigation;
+
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
 public class SceneMenuView extends MenuView {
-  
-    
     
     public SceneMenuView() {
         super("\n"
@@ -29,160 +29,73 @@ public class SceneMenuView extends MenuView {
     }
     
     @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "M":
-                this.moveMenu();
+                nav = this.moveMenu();
                 break;
             case "C":
-                this.createAntidote();
+                nav = this.createAntidote();
                 break;
             case "S":
-                this.searchLocation();
+                nav = this.searchLocation();
                 break;
             case "T":
-                this.talkToPerson();
+                nav = this.talkToPerson();
                 break;
             case "P":
-                this.playerStats();
-                break;
-            case "B":
-                this.gameMenu();
+                nav = this.playerStats();
                 break;
             case "U":
-                this.calcVolumeOfFlaskQuestion();
+                nav = this.calcVolumeOfFlaskQuestion();
                 break;
+            case "B":
+                // Back to Game Menu (immediately)
+                return Navigation.ExitView;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-        return false;
+        
+        // Stop exiting view and continue with this view
+        if (nav == Navigation.ExitView) {
+            nav = Navigation.Continue;
+        }
+
+        return nav;
     }
     
-    private void moveMenu() {
-        MoveView moveMenu = new MoveView();
-        moveMenu.display();
+    private Navigation moveMenu() {
+        MoveView moveMenu = new MoveView("Scene Menu");
+        return moveMenu.display();
     }
 
-    private void createAntidote() {
+    private Navigation createAntidote() {
         AntidoteMenuView antidoteView = new AntidoteMenuView();
-        antidoteView.display();
+        return antidoteView.display();
     }
 
-    private void searchLocation() {
+    private Navigation searchLocation() {
         // SearchLocationView searchLocation = new SearchLocationView();
         // searchLocation
         System.out.println("\n SearchLocation Function called ");
+        return Navigation.Continue;
     }
 
-    private void talkToPerson() {
+    private Navigation talkToPerson() {
         System.out.println("\n TalktoPerson Function called ");
+        return Navigation.Continue;
     }
 
-    private void playerStats() {
+    private Navigation playerStats() {
         PlayerStatsView playerStats = new PlayerStatsView();
-        playerStats.display();
+        return playerStats.display();
     }
 
-    private void gameMenu() {
-        GameMenuView gameMenu = new GameMenuView();
-        gameMenu.display();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*  
-    private final AntidoteMenuView antidoteMenuView;
-    private final PlayerStatsView playerStatsView;
-    
-    public SceneMenuView() {
-        super("\n"
-            + "\n-----------------------------------------"
-            + "\n| Scene Menu                            |"
-            + "\n-----------------------------------------"
-            + "\nM - Move: change Location"
-            + "\nC - Create Antidote"
-            + "\nS - Search Location"
-            + "\nT - Talk to Person"
-            + "\nP - Player Stats"
-            + "\nB - Back to Game Menu"
-            + "\n----------------------------------------",
-        null);
-        this.antidoteMenuView = new AntidoteMenuView();
-        this.playerStatsView = new PlayerStatsView();
-    }
-
-    protected ReturnValue doAction(String choice) {
-        ReturnValue value = ReturnValue.CONTINUE;
-        boolean ignoreBreak = true;
- 
-        switch (choice) {
-            case "M":
-                value = this.movePlayer();
-                break;
-            case "C":
-                value = this.antidoteMenuView.displayMenu();
-                break;
-            case "S":
-                value = this.searchLocation();
-                break;
-            case "T":
-                value = this.talkToPerson();
-                break;                
-            case "P":
-                this.playerStatsView.displayMenu();
-                break;
-            case "B":
-                value = ReturnValue.BREAK;
-                ignoreBreak = false;
-                break;
-            default:
-                System.out.println("\n*** Invalid selection *** Try again");
-                break;
-        }
-        
-        // for certain sub-menus (like PlayerStatsMenu), we don't want to
-        // return to the main menu, but to stop here
-        if (ignoreBreak == true && value == ReturnValue.BREAK) {
-            value = ReturnValue.CONTINUE;
-        }
-        
-        return value;
-    }
-
-    private ReturnValue movePlayer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private ReturnValue searchLocation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private ReturnValue talkToPerson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    */
-
-    private void calcVolumeOfFlaskQuestion() {
+    private Navigation calcVolumeOfFlaskQuestion() {
         CalcVolumeOfFlaskQuestionView calcVolumeOfFlaskQuestion = new CalcVolumeOfFlaskQuestionView();
-        calcVolumeOfFlaskQuestion.display();
-        
+        return calcVolumeOfFlaskQuestion.display();
     }
 }

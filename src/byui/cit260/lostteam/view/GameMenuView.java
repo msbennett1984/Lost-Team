@@ -8,6 +8,7 @@ package byui.cit260.lostteam.view;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
+import byui.cit260.lostteam.model.Navigation;
 import lostteam.LostTeam;
 
 /**
@@ -25,43 +26,55 @@ public class GameMenuView extends MenuView {
             + "\nM - Move to new Location"
             + "\nS - Scene menu"
             + "\nB - Back to Main Menu"
-            + "\nE - Exit game"
+            + "\nE - Exit Game"
             + "\n----------------------------------------");
     }
     
     @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "D":
                 this.displayMap();
                 break;
             case "M":
-                this.moveMenu();
+                nav = this.moveMenu();
                 break;
             case "S":
-                this.sceneMenu();
+                nav = this.sceneMenu();
                 break;
             case "B":
-                return true;
+                // Back to Main Menu (immediately)
+                return Navigation.ExitView;
+            case "E":
+                // Exit Game (immediately)
+                return Navigation.ExitGame;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
-        return false;
+
+        // Stop exiting view and continue with this view
+        if (nav == Navigation.ExitView) {
+            nav = Navigation.Continue;
+        }
+      
+        return nav;
     }
     
-    private void sceneMenu() {
+    private Navigation sceneMenu() {
         SceneMenuView sceneMenu = new SceneMenuView();
-        sceneMenu.display();
+        return sceneMenu.display();
     }
     
-    private void moveMenu() {
-        MoveView moveMenu = new MoveView();
-        moveMenu.display();
-        displayMap();
+    private Navigation moveMenu() {
+        MoveView moveMenu = new MoveView("Game Menu");
+        Navigation nav = moveMenu.display();
+        if (nav == Navigation.ExitView) {
+            displayMap();
+        }
+        return nav;
     }
 
     public void displayMap() {
@@ -109,50 +122,4 @@ public class GameMenuView extends MenuView {
      System.out.println("|");
     }
  }
-    /*
-    private final SceneMenuView sceneMenuView;
-    
-    public GameMenuView() {
-        super("\n"
-            + "\n-----------------------------------------"
-            + "\n| Game Menu View                        |"
-            + "\n-----------------------------------------"
-            + "\nS - Scene menu"
-            + "\nB - Back to Main Menu"
-            + "\nQ - Quit game"
-            + "\n----------------------------------------",
-        "Q");
-        this.sceneMenuView = new SceneMenuView();
-    }
-    
-    protected ReturnValue doAction(String choice) {
-        ReturnValue value = ReturnValue.CONTINUE;
-        boolean ignoreBreak = true;
-
-        switch (choice) {
-            case "S":
-                value = this.sceneMenuView.displayMenu();
-                break;
-            case "B":
-                value = ReturnValue.BREAK;
-                ignoreBreak = false;
-                break;
-            case "Q":
-                value = ReturnValue.EXIT;
-                break;
-            default:
-                System.out.println("\n*** Invalid selection *** Try again");
-                break;
-        }
-        
-        // for certain sub-menus (like SceneMenuView), we don't want to
-        // return to the main menu, but to stop here
-        if (ignoreBreak == true && value == ReturnValue.BREAK) {
-            value = ReturnValue.CONTINUE;
-        }
-
-        return value;
-    }
-*/
-
 }

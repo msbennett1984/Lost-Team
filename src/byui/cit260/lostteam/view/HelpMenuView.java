@@ -7,6 +7,9 @@ package byui.cit260.lostteam.view;
 
 // import byui.cit260.lostteam.view.MenuView.ReturnValue;
 
+import byui.cit260.lostteam.model.Navigation;
+
+
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
@@ -22,112 +25,55 @@ public class HelpMenuView extends MenuView {
             + "\nH - How to Move"
             + "\nF - Finding Clues"
             + "\nB - Back to Main Menu"
-            + "\nE - Quit Game"
+            + "\nE - Exit Game"
             + "\n----------------------------------------");
     }
     
-    
     @Override
-    public boolean doAction(String choice) {
-        // changes all values to uppercase
-        choice = choice.toUpperCase();
+    public Navigation doAction(String choice) {
+        Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "G":
-                this.goalOfGame();
+                nav = this.goalOfGame();
                 break;
             case "H":
-                this.howToMove();
+                nav = this.howToMove();
+                break;
             case "F":
-                this.findingClues();
+                nav = this.findingClues();
                 break;
             case "B":
-                this.mainMenu();
-                break;
+                // Back to Main Menu (immediately)
+                return Navigation.ExitView;
+            case "E":
+                // Exit Game (immediately)
+                return Navigation.ExitGame;
             default:
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
+        }
+        
+        // Stop exiting view and continue with this view
+        if (nav == Navigation.ExitView) {
+            nav = Navigation.Continue;
         }
       
-        return false;
+        return nav;
     }
     
-    
-    private void goalOfGame() {
+    private Navigation goalOfGame() {
         System.out.println("\n*** goalOfGame function called ***");
+        return Navigation.Continue;
     }
 
-    private void howToMove() {
+    private Navigation howToMove() {
         System.out.println("\n*** howToMove function called ***");
+        return Navigation.Continue;
     }
 
-    private void findingClues() {
+    private Navigation findingClues() {
         System.out.println("\n*** findingClues function called ***");
+        return Navigation.Continue;
     }
-
-    private void mainMenu() {
-        MainMenuView mainMenu = new MainMenuView();
-        mainMenu.display();
-    }
-    
-    
-    
-    /*
-    public HelpMenuView() {
-        super("\n"
-            + "\n-----------------------------------------"
-            + "\n| Help Menu                             |"
-            + "\n-----------------------------------------"
-            + "\nG - Goal of Game"
-            + "\nH - How to Move"
-            + "\nF - Finding Clues"
-            + "\nB - Back to Main Menu"
-            + "\nQ - Quit Game"
-            + "\n----------------------------------------",
-        "Q");
-    }
-    
-    protected ReturnValue doAction(String choice) {
-        ReturnValue value = ReturnValue.CONTINUE;
-        
-        switch (choice) {
-            case "G":
-                value = this.displayGoalOfGame();
-                break;
-            case "H":
-                value = this.displayHowToMove();
-                break;
-            case "F":
-                value = this.displayFindingClues();
-                break;
-            case "B":
-                value = ReturnValue.BREAK;
-                break;
-            case "E":
-                value = ReturnValue.EXIT;
-                break;
-            default:
-                System.out.println("\n*** Invalid selection *** Try again");
-                break;
-        }
-        
-        return value;
-    }
-
-    private ReturnValue displayGoalOfGame() {
-        System.out.println("\n*** displayGoalOfGame stub function called ***");
-        return ReturnValue.CONTINUE;
-    }
-
-    private ReturnValue displayHowToMove() {
-        System.out.println("\n*** displayHowToMove stub function called ***");
-        return ReturnValue.CONTINUE;
-    }
-
-    private ReturnValue displayFindingClues() {
-        System.out.println("\n*** displayFindingClues stub function called ***");
-        return ReturnValue.CONTINUE;
-    }
-*/
-    
 }
