@@ -68,4 +68,30 @@ public abstract class MenuView implements ViewInterface {
         
         return value.toUpperCase(); // return the value entered
     }
+    
+    public int getInputInteger() {
+        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
+        String value = ""; // String value to be parsed
+        int valueInteger = -1;
+        boolean valid = false; // initialize to not valid
+        
+        while (!valid) { // loop until a valid value is entered
+            value = keyboard.nextLine(); // get next line typed on keyboard
+            value = value.trim(); // trim off leading and trailing blanks
+            
+            if (value.isEmpty()) {
+                System.out.println("Invalid input, please input an integer");
+            } else {
+                try {
+                    valueInteger = Integer.parseInt(value);
+                    valid = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input, please input an integer");
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        
+        return valueInteger;
+    }
 }

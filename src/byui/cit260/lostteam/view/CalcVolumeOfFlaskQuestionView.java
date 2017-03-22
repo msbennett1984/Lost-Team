@@ -5,6 +5,12 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.control.ClueControl;
+import byui.cit260.lostteam.exception.ClueControlException;
+import byui.cit260.lostteam.exception.NonPositiveHeightException;
+import byui.cit260.lostteam.exception.NonPositiveRadiusException;
+import byui.cit260.lostteam.exception.VolumeHighException;
+import byui.cit260.lostteam.exception.VolumeLowException;
 import byui.cit260.lostteam.model.Navigation;
 
 /**
@@ -14,7 +20,7 @@ import byui.cit260.lostteam.model.Navigation;
  */
 public class CalcVolumeOfFlaskQuestionView extends MenuView {
     
-    public CalcVolumeOfFlaskQuestionView(){
+    public CalcVolumeOfFlaskQuestionView() {
          super ( "\n                                                 "
         + "\n-------------------------------------------------------"
         + "\nA child ask you to make a flask for his friend, the    "
@@ -27,13 +33,14 @@ public class CalcVolumeOfFlaskQuestionView extends MenuView {
         + "\nY - Yes I will help                                    "
         + "\nN - No I will not help (back to Scene Menu)            ");
     }
+
     @Override
     public Navigation doAction(String choice) {
         Navigation nav = Navigation.Continue;
         
         switch (choice) {
             case "Y":
-                this.answerQuestion();
+                nav = this.answerQuestion();
                 break;
             case "N":
                 // Back to Scene Menu (immediately)
@@ -46,7 +53,31 @@ public class CalcVolumeOfFlaskQuestionView extends MenuView {
         return nav;
     } 
 
-    private void answerQuestion() {
-        System.out.println("\n*** AnswerQuestion Function called ***");
+    private Navigation answerQuestion() {
+        System.out.println("Please enter the height of the flask:");
+        int height = getInputInteger();
+        System.out.println("Please enter the radius of the flask:");
+        int radius = getInputInteger();
+        double volume = -1;
+        try {
+            volume = ClueControl.calcVolumeOfFlask((double)height, (double)radius);
+        } catch (NonPositiveHeightException e) {
+            System.out.println("Height must be positive, please try again");
+            return Navigation.Continue;
+        } catch (NonPositiveRadiusException e) {
+            System.out.println("Radius must be positive, please try again");
+            return Navigation.Continue;
+        } catch (VolumeLowException e) {
+            System.out.println("Volume of flask is too small, please try again");
+            return Navigation.Continue;
+        } catch (VolumeHighException e) {
+            System.out.println("Volume of flask is too big, please try again");
+            return Navigation.Continue;
+        } catch (ClueControlException e) {
+            System.out.println("Unknown error: " + e.getMessage() + " (please try again)");
+            return Navigation.Continue;
+        }
+        System.out.println("Success! The flask volume of " + volume + " is just right!");
+        return Navigation.ExitView;
     }
 }

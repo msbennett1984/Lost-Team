@@ -5,6 +5,12 @@
  */
 package byui.cit260.lostteam.control;
 
+import byui.cit260.lostteam.exception.ClueControlException;
+import byui.cit260.lostteam.exception.NonPositiveHeightException;
+import byui.cit260.lostteam.exception.NonPositiveRadiusException;
+import byui.cit260.lostteam.exception.VolumeHighException;
+import byui.cit260.lostteam.exception.VolumeLowException;
+
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
@@ -29,19 +35,19 @@ public class ClueControl {
         }
     }
     
-    public double calcVolumeOfFlask(double height, double radius) {
+    public static double calcVolumeOfFlask(double height, double radius) throws ClueControlException {
         if (height <= 0) {
-            return -1; // height is negative
+            throw new NonPositiveHeightException(); // height is negative
         } else if (radius <= 0) {
-            return -2; // radius is negative
+            throw new NonPositiveRadiusException(); // radius is negative
         }
         
         double volume = (height / 3.0 * Math.PI * Math.pow(radius, 2));
         
         if (volume < 15) {
-            return -3; // volume is too low
+            throw new VolumeLowException(); // volume is too low
         } else if (volume > 25) {
-            return -4; // volume is too high
+            throw new VolumeHighException(); // volume is too high
         } else {
             return volume;
         }
