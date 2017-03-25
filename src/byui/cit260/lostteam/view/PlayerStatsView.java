@@ -5,6 +5,7 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.exception.GameControlException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.ActorType;
 import byui.cit260.lostteam.model.Game;
@@ -12,6 +13,9 @@ import byui.cit260.lostteam.model.InventoryItem;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Navigation;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -31,6 +35,7 @@ public class PlayerStatsView extends MenuView {
             + "\nP - People Spoken To (Clues)             "
             + "\nI - Item Inventory                       "
             + "\nL - Locations Visited                    "
+            + "\nX - Locations Visited (Debug)            "
             + "\nT - Time Remaining                       "
             + "\nB - Back to Scene Menu                   "
             + "\n-----------------------------------------");
@@ -48,7 +53,10 @@ public class PlayerStatsView extends MenuView {
                 this.itemInventory();
                 break;
             case "L":
-                this.locationsVisited();
+                this.locationsVisited(this.console);
+                break;
+            case "X":
+                this.locationsVisitedDebug();
                 break;
             case "T":
                 this.timeRemaining();
@@ -133,7 +141,7 @@ public class PlayerStatsView extends MenuView {
         
     }
 
-    private void locationsVisited() {
+    private void locationsVisited(PrintWriter writer) {
         Game game = LostTeam.getCurrentGame(); // retreive the game
         Map map = game.getMap(); // retreive the map from game
         Location[][] locations = map.getLocations(); // retreive the locations from map
@@ -148,10 +156,10 @@ public class PlayerStatsView extends MenuView {
             }
         }
         
-        System.out.println("\n         Locations Visited         \n");
+        writer.println("\n         Locations Visited         \n");
         
         if (visitedLocations.isEmpty()) {
-            System.out.println("*** You haven't visited anywhere yet. ***");
+            this.console.println("*** You haven't visited anywhere yet. ***");
             return;
         }
 
@@ -160,8 +168,22 @@ public class PlayerStatsView extends MenuView {
                 l1.getScene().getDescription().compareTo(l2.getScene().getDescription())
         );
         for (Location location : visitedLocations) {
-            System.out.println(location.getScene().getDescription()
+            writer.println(location.getScene().getDescription()
                 + " (" + location.getScene().getSignSymbol() + ")");
+        }
+    }
+    
+    private void locationsVisitedDebug() {
+        // prompt for and get the name of the file to save the game in
+        this.console.println("\n\nEnter the file path for the file where the "
+                           + "locations visited is to be saved.");
+        String filePath = this.getInput();
+        
+        try(FileOutputStream fops = new FileOutputStream(filePath)) {
+            PrintWriter output = new PrintWriter(fops, true);
+            this.locationsVisited(output); // write the locations visited to the file
+        } catch (Exception ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
         }
     }
 
