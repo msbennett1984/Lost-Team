@@ -5,6 +5,7 @@
  */
 package byui.cit260.lostteam.control;
 
+import byui.cit260.lostteam.exception.LoseGameException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
@@ -66,10 +67,23 @@ public class GameControl {
         return inventory;
     }
     
-    
-    
     public static Set<Actor> createInteractions() {
         LinkedHashSet<Actor> interactions = new LinkedHashSet<>();        
         return interactions;
+    }
+    
+    public static void decrementRemainingTime(long amount) throws LoseGameException {
+        Game game = LostTeam.getCurrentGame();
+        long remainingTime = game.getRemainingTime();
+        remainingTime = remainingTime - amount;
+        if (remainingTime <= 0) {
+            throw new LoseGameException();
+        }
+        game.setRemainingTime(remainingTime);
+    }
+    
+    public static void addInteraction(Actor actor) {
+        Game game = LostTeam.getCurrentGame();
+        game.addInteraction(actor);
     }
 }

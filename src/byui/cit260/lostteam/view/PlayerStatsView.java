@@ -70,25 +70,42 @@ public class PlayerStatsView extends MenuView {
         
         // variable game is assigned the value of getting the current game
         Game game = LostTeam.getCurrentGame();
-        ActorType[] type = game.getType();
+        ArrayList<Actor> actors = new ArrayList<>();
         
         System.out.println          ("\n          Actors           ");
         //45 spots
         sentence = new StringBuilder("                                       ");
         sentence.insert(0, "Person");
         sentence.insert(20, "Clue Given");
+        System.out.println(sentence.toString());
         
-        //For each loop Actor
-        for (Actor actor : Actor.values()){
-            
+        // collect actors we have interacted with
+        for (Actor actor : Actor.values()) {
+            if (!game.hasInteraction(actor)) {
+                continue;
+            }
+            actors.add(actor);
+        }
+        
+        if (actors.isEmpty()) {
+            System.out.println("*** You haven't spoken to anyone yet. ***");
+            return;
+        }
+        
+        // sort the list of actors by description
+        actors.sort(
+            (a1, a2) ->
+                a1.getDescription().compareTo(a2.getDescription())
+        );
+        
+        // for loop to display actors
+        for (Actor actor : actors) {
             sentence = new StringBuilder("                                       ");
             sentence.insert(0, actor.getDescription());
             sentence.insert(20, actor.getClueGiven());
-            
             System.out.println(sentence.toString());
-            
         }
-        System.out.println("Total number of actors is " + Actor.values().length);
+        System.out.println("Total number of actors is " + actors.size());
     }
 
     private void itemInventory() {

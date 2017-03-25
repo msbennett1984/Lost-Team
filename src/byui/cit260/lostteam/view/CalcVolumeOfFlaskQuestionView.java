@@ -6,7 +6,9 @@
 package byui.cit260.lostteam.view;
 
 import byui.cit260.lostteam.control.ClueControl;
+import byui.cit260.lostteam.control.GameControl;
 import byui.cit260.lostteam.exception.ClueControlException;
+import byui.cit260.lostteam.exception.LoseGameException;
 import byui.cit260.lostteam.exception.NonPositiveHeightException;
 import byui.cit260.lostteam.exception.NonPositiveRadiusException;
 import byui.cit260.lostteam.exception.VolumeHighException;
@@ -49,6 +51,15 @@ public class CalcVolumeOfFlaskQuestionView extends MenuView {
                 System.out.println("\n*** Invalid selection *** Try again");
                 break;
         }
+        
+        if (nav == Navigation.WrongAnswer) {
+            nav = Navigation.Continue;
+            try {
+                GameControl.decrementRemainingTime(5);
+            } catch (LoseGameException e) {
+                nav = Navigation.LostGame;
+            }
+        }
 
         return nav;
     } 
@@ -62,22 +73,22 @@ public class CalcVolumeOfFlaskQuestionView extends MenuView {
         try {
             volume = ClueControl.calcVolumeOfFlask((double)height, (double)radius);
         } catch (NonPositiveHeightException e) {
-            System.out.println("Height must be positive, please try again");
-            return Navigation.Continue;
+            System.out.println("\n*** Height must be positive *** Try again");
+            return Navigation.WrongAnswer;
         } catch (NonPositiveRadiusException e) {
-            System.out.println("Radius must be positive, please try again");
-            return Navigation.Continue;
+            System.out.println("\n*** Radius must be positive *** Try again");
+            return Navigation.WrongAnswer;
         } catch (VolumeLowException e) {
-            System.out.println("Volume of flask is too small, please try again");
-            return Navigation.Continue;
+            System.out.println("\n*** Volume of flask is too small *** Try again");
+            return Navigation.WrongAnswer;
         } catch (VolumeHighException e) {
-            System.out.println("Volume of flask is too big, please try again");
-            return Navigation.Continue;
+            System.out.println("\n*** Volume of flask is too big *** Try again");
+            return Navigation.WrongAnswer;
         } catch (ClueControlException e) {
-            System.out.println("Unknown error: " + e.getMessage() + " (please try again)");
+            System.out.println("\n*** Unknown error: " + e.getMessage() + " *** Try again");
             return Navigation.Continue;
         }
-        System.out.println("Success! The flask volume of " + volume + " is just right!");
+        System.out.println("\n*** Success! *** The flask volume of " + volume + " is just right!");
         return Navigation.ExitView;
     }
 }
