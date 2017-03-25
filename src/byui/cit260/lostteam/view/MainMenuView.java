@@ -58,6 +58,11 @@ public class MainMenuView extends MenuView {
         if (nav == Navigation.ExitView) {
             nav = Navigation.Continue;
         }
+        
+        if (nav == Navigation.LostGame) {
+            System.out.println("\n*** Game Over ***\n");
+            nav = Navigation.Continue;
+        }
       
         return nav;
     }

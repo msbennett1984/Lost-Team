@@ -37,7 +37,7 @@ public class CalcVolumeOfFlaskQuestionView extends ClueView {
         + "\nY - Yes I will help                                    "
         + "\nN - No I will not help (back to Scene Menu)            ",
             actor,
-            5 // wrongAnswerTimeDeduction
+            100 // wrongAnswerTimeDeduction
         );
     }
 
