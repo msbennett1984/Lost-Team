@@ -12,6 +12,7 @@ import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Point;
 import byui.cit260.lostteam.model.Scene;
 import byui.cit260.lostteam.model.SceneType;
+import byui.cit260.lostteam.view.CalcVolumeOfFlaskQuestionView;
 import lostteam.LostTeam;
 
 /**
@@ -90,6 +91,8 @@ public class MapControl {
         Scene stopSign = new Scene();
         stopSign.setDescription("Stop Sign");
         stopSign.setSignSymbol("SS");
+        stopSign.setActor(Actor.Child);
+        stopSign.setClueView(new CalcVolumeOfFlaskQuestionView(stopSign.getActor()));
         scenes[SceneType.Stop_Sign.ordinal()] = stopSign;
 
         // Scene 10

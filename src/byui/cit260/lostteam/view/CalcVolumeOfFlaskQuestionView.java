@@ -13,6 +13,7 @@ import byui.cit260.lostteam.exception.NonPositiveHeightException;
 import byui.cit260.lostteam.exception.NonPositiveRadiusException;
 import byui.cit260.lostteam.exception.VolumeHighException;
 import byui.cit260.lostteam.exception.VolumeLowException;
+import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Navigation;
 
 /**
@@ -20,10 +21,11 @@ import byui.cit260.lostteam.model.Navigation;
  * @author Sherry Bennett <msbennett84@gmail.com>
  * Special thank you to Dallin Barlow for blazing the trail.
  */
-public class CalcVolumeOfFlaskQuestionView extends MenuView {
+public class CalcVolumeOfFlaskQuestionView extends ClueView {
     
-    public CalcVolumeOfFlaskQuestionView() {
-         super ( "\n                                                 "
+    public CalcVolumeOfFlaskQuestionView(Actor actor) {
+        super(
+          "\n                                                       "
         + "\n-------------------------------------------------------"
         + "\nA child ask you to make a flask for his friend, the    "
         + "\nscientist, that is not too big and not too small.      "
@@ -33,38 +35,14 @@ public class CalcVolumeOfFlaskQuestionView extends MenuView {
         + "\nflask). If it is either too big or too small, you will "
         + "\nneed to create another. Will you help                  "
         + "\nY - Yes I will help                                    "
-        + "\nN - No I will not help (back to Scene Menu)            ");
+        + "\nN - No I will not help (back to Scene Menu)            ",
+            actor,
+            5 // wrongAnswerTimeDeduction
+        );
     }
 
     @Override
-    public Navigation doAction(String choice) {
-        Navigation nav = Navigation.Continue;
-        
-        switch (choice) {
-            case "Y":
-                nav = this.answerQuestion();
-                break;
-            case "N":
-                // Back to Scene Menu (immediately)
-                return Navigation.ExitView;
-            default:
-                System.out.println("\n*** Invalid selection *** Try again");
-                break;
-        }
-        
-        if (nav == Navigation.WrongAnswer) {
-            nav = Navigation.Continue;
-            try {
-                GameControl.decrementRemainingTime(5);
-            } catch (LoseGameException e) {
-                nav = Navigation.LostGame;
-            }
-        }
-
-        return nav;
-    } 
-
-    private Navigation answerQuestion() {
+    public Navigation answerQuestion() {
         System.out.println("Please enter the height of the flask:");
         int height = getInputInteger();
         System.out.println("Please enter the radius of the flask:");

@@ -86,4 +86,11 @@ public class GameControl {
         Game game = LostTeam.getCurrentGame();
         game.addInteraction(actor);
     }
+    
+    public static Scene getCurrentScene() {
+        Game game = LostTeam.getCurrentGame();
+        Map map = game.getMap();
+        Location location = map.getCurrentLocation();
+        return location.getScene();
+    }
 }

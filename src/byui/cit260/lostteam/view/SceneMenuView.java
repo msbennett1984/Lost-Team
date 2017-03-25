@@ -5,7 +5,10 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.Navigation;
+import lostteam.LostTeam;
 
 /**
  *
@@ -23,7 +26,6 @@ public class SceneMenuView extends MenuView {
             + "\nS - Search Location"
             + "\nT - Talk to Person"
             + "\nP - Player Stats"
-            + "\nU - Test CalcVolumeOfFlaskQuestionView"
             + "\nB - Back to Game Menu"
             + "\n----------------------------------------");
     }
@@ -47,9 +49,6 @@ public class SceneMenuView extends MenuView {
                 break;
             case "P":
                 nav = this.playerStats();
-                break;
-            case "U":
-                nav = this.calcVolumeOfFlaskQuestion();
                 break;
             case "B":
                 // Back to Game Menu (immediately)
@@ -85,17 +84,12 @@ public class SceneMenuView extends MenuView {
     }
 
     private Navigation talkToPerson() {
-        System.out.println("\n TalktoPerson Function called ");
-        return Navigation.Continue;
+        ClueView clueView = GameControl.getCurrentScene().getClueView();
+        return clueView.display();
     }
 
     private Navigation playerStats() {
         PlayerStatsView playerStats = new PlayerStatsView();
         return playerStats.display();
-    }
-
-    private Navigation calcVolumeOfFlaskQuestion() {
-        CalcVolumeOfFlaskQuestionView calcVolumeOfFlaskQuestion = new CalcVolumeOfFlaskQuestionView();
-        return calcVolumeOfFlaskQuestion.display();
     }
 }

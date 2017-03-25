@@ -5,6 +5,7 @@
  */
 package byui.cit260.lostteam.model;
 
+import byui.cit260.lostteam.view.ClueView;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,14 +15,12 @@ import java.util.Objects;
  */
 public class Scene implements Serializable {
     
-    
-    
     //class instance variables
     private String description;
     private String signSymbol;
     private int coordinates;
     private Actor actor;
-    private Clue clue;
+    private ClueView clueView;
     //private String name;
 
    
@@ -64,15 +63,13 @@ public class Scene implements Serializable {
         this.actor = actor;
     }
 
-    public Clue getClue() {
-        return clue;
+    public ClueView getClueView() {
+        return clueView;
     }
 
-    public void setClue(Clue clue) {
-        this.clue = clue;
+    public void setClueView(ClueView clueView) {
+        this.clueView = clueView;
     }
-    
-    
 
     @Override
     protected void finalize() throws Throwable {
