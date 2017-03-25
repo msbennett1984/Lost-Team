@@ -6,7 +6,13 @@
 package byui.cit260.lostteam.view;
 
 import byui.cit260.lostteam.model.Navigation;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lostteam.LostTeam;
 
 /**
  *
@@ -15,6 +21,9 @@ import java.util.Scanner;
 public abstract class MenuView implements ViewInterface {
     
     protected String displayMessage;
+    
+    protected final BufferedReader keyboard = LostTeam.getInFile();
+    protected final PrintWriter console = LostTeam.getOutFile();
     
     public MenuView(String message) {
         this.displayMessage = message;
@@ -48,7 +57,6 @@ public abstract class MenuView implements ViewInterface {
     
     @Override
     public String getInput() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
         String value = ""; // value to be returned
         boolean valid = false; // initialize to not valid
         
@@ -56,8 +64,12 @@ public abstract class MenuView implements ViewInterface {
             this.beforeGetInput();
             System.out.println(this.displayMessage);
             
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim off leading and trailing blanks
+            try {
+                value = this.keyboard.readLine(); // get next line typed on keyboard
+                value = value.trim(); // trim off leading and trailing blanks
+            } catch (IOException ex) {
+                Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             if (value.isEmpty()) {
                 System.out.println("Invalid input please input a correct character");
@@ -70,14 +82,17 @@ public abstract class MenuView implements ViewInterface {
     }
     
     public int getInputInteger() {
-        Scanner keyboard = new Scanner(System.in); // get infile for keyboard
         String value = ""; // String value to be parsed
         int valueInteger = -1;
         boolean valid = false; // initialize to not valid
         
         while (!valid) { // loop until a valid value is entered
-            value = keyboard.nextLine(); // get next line typed on keyboard
-            value = value.trim(); // trim off leading and trailing blanks
+            try {
+                value = this.keyboard.readLine(); // get next line typed on keyboard
+                value = value.trim(); // trim off leading and trailing blanks
+            } catch (IOException ex) {
+                Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             if (value.isEmpty()) {
                 System.out.println("Invalid input, please input an integer");

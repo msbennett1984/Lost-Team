@@ -68,7 +68,7 @@ public class StartProgramView {
     /**
      * displays the start program view
      */
-    public void displayStartProgramView() {
+    public void display() {
         /*
         do
             Prompt for and get the input value
