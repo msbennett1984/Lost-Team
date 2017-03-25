@@ -9,7 +9,6 @@ import byui.cit260.lostteam.model.Navigation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lostteam.LostTeam;
@@ -34,12 +33,7 @@ public abstract class MenuView implements ViewInterface {
         Navigation nav = Navigation.Continue;
         do {
             // prompt for and get user's input
-            String choice = this.getInput();
-//            // user wants to quit
-//            if (choice.equals("Q")) {
-//                // exit the view
-//                return Navigation.ExitView;
-//            }
+            String choice = this.getInputChoice();
             // does the requested action and (possibly) displays the next view
             nav = this.doAction(choice);
         } while (nav == Navigation.Continue);
@@ -61,52 +55,55 @@ public abstract class MenuView implements ViewInterface {
         boolean valid = false; // initialize to not valid
         
         while (!valid) { // loop until a valid value is entered
-            this.beforeGetInput();
-            System.out.println(this.displayMessage);
-            
             try {
                 value = this.keyboard.readLine(); // get next line typed on keyboard
                 value = value.trim(); // trim off leading and trailing blanks
             } catch (IOException ex) {
-                Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             }
             
             if (value.isEmpty()) {
-                System.out.println("Invalid input please input a correct character");
+                ErrorView.display(this.getClass().getName(),
+                        "*** Invalid input *** Try again");
             } else {
                 valid = true;
             }
         }
         
-        return value.toUpperCase(); // return the value entered
+        return value; // return the value entered
     }
     
+    @Override
+    public String getInputChoice() {
+        this.beforeGetInput();
+        this.console.println(this.displayMessage);
+        String value = this.getInput();
+        return value.toUpperCase(); // return the upper-case value entered
+    }
+    
+    @Override
     public int getInputInteger() {
-        String value = ""; // String value to be parsed
-        int valueInteger = -1;
+        String value = ""; // value to be parsed
+        int valueInteger = -1; // value to be returned
         boolean valid = false; // initialize to not valid
-        
+
         while (!valid) { // loop until a valid value is entered
-            try {
-                value = this.keyboard.readLine(); // get next line typed on keyboard
-                value = value.trim(); // trim off leading and trailing blanks
-            } catch (IOException ex) {
-                Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            value = this.getInput();
             if (value.isEmpty()) {
-                System.out.println("Invalid input, please input an integer");
+                ErrorView.display(this.getClass().getName(),
+                        "*** Invalid input *** Try again");
             } else {
                 try {
                     valueInteger = Integer.parseInt(value);
                     valid = true;
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input, please input an integer");
-                    System.out.println(e.getMessage());
+                    ErrorView.display(this.getClass().getName(),
+                            "*** Invalid input *** please input an integer: " + e.getMessage());
                 }
+                valid = true;
             }
         }
         
-        return valueInteger;
+        return valueInteger; // return the integer value entered
     }
 }

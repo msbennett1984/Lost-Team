@@ -15,6 +15,8 @@ public interface ViewInterface {
 
     public Navigation display();
     public String getInput();
+    public String getInputChoice();
+    public int getInputInteger();
     public Navigation doAction(String value);
 
 }

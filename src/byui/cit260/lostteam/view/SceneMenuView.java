@@ -6,8 +6,14 @@
 package byui.cit260.lostteam.view;
 
 import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.Navigation;
+import byui.cit260.lostteam.model.Scene;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lostteam.LostTeam;
 
 /**
@@ -84,8 +90,8 @@ public class SceneMenuView extends MenuView {
     }
 
     private Navigation talkToPerson() {
-        ClueView clueView = GameControl.getCurrentScene().getClueView();
-        return clueView.display();
+        Scene scene = GameControl.getCurrentScene();
+        return scene.displayClueView();
     }
 
     private Navigation playerStats() {

@@ -21,11 +21,11 @@ public class MainMenuView extends MenuView {
             + "\n-----------------------------------------"
             + "\n| Main Menu                             |"
             + "\n-----------------------------------------"
-            + "\nN - Start New Game"
-            + "\nO - Load Game"
+            + "\nN - Start new game"
+            + "\nG - Get and start saved game"
             + "\nH - Get help on how to play the game"
-            + "\nS - Save Game"
-            + "\nE - Exit Game"
+            + "\nS - Save game"
+            + "\nQ - Quit"
             + "\n----------------------------------------");
     }
     
@@ -37,8 +37,8 @@ public class MainMenuView extends MenuView {
             case "N":
                 nav = this.startNewGame();
                 break;
-            case "O":
-                nav = this.startExistingGame();
+            case "G":
+                nav = this.startSavedGame();
                 break;
             case "H":
                 nav = this.displayHelpMenu();
@@ -46,11 +46,12 @@ public class MainMenuView extends MenuView {
             case "S":
                 nav = this.saveGame();
                 break;
-            case "E":
-                // Exit Game (immediately)
+            case "Q":
+                // Quit (immediately)
                 return Navigation.ExitGame;
             default:
-                System.out.println("\n*** Invalid selection *** Try again");
+                ErrorView.display("MainMenuView",
+                        "*** Invalid selection *** Try again");
                 break;
         }
         
@@ -74,9 +75,24 @@ public class MainMenuView extends MenuView {
         return gameMenu.display();
     }
 
-    private Navigation startExistingGame() {
-        System.out.println("\n*** startExistingGame function called ***");
-        return Navigation.Continue;
+    private Navigation startSavedGame() {
+        // prompt for and get the name of the file to save the game in
+        this.console.println("\n\nEnter the file path for file where the game"
+                           + "is to be saved.");
+
+        String filePath = this.getInput();
+        
+        try {
+            // start a saved game
+            GameControl.getSavedGame(filePath);
+        } catch (Exception ex) {
+            ErrorView.display(this.getClass().getName(),
+                    ex.getMessage());
+        }
+        
+        // display the game menu
+        GameMenuView gameMenu = new GameMenuView();
+        return gameMenu.display();
     }
 
     private Navigation displayHelpMenu() {
@@ -85,7 +101,17 @@ public class MainMenuView extends MenuView {
     }
 
     private Navigation saveGame() {
-        System.out.println("\n*** saveGame function called ***");
+        // prompt for and get the name of the file to save the game in
+        this.console.println("\n\nEnter the file path for the file where the game "
+                           + "is to be saved.");
+        String filePath = this.getInput();
+        
+        try {
+            // save the game to the specified file
+            GameControl.saveGame(LostTeam.getCurrentGame(), filePath);
+        } catch (Exception ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
         return Navigation.Continue;
     }
 }
