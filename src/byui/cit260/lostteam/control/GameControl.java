@@ -5,6 +5,7 @@
  */
 package byui.cit260.lostteam.control;
 
+import byui.cit260.lostteam.exception.GameControlException;
 import byui.cit260.lostteam.exception.LoseGameException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Game;
@@ -15,6 +16,11 @@ import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Player;
 import byui.cit260.lostteam.model.Scene;
 import byui.cit260.lostteam.model.SceneType;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.Exception;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import lostteam.LostTeam;
@@ -92,5 +98,29 @@ public class GameControl {
         Map map = game.getMap();
         Location location = map.getCurrentLocation();
         return location.getScene();
+    }
+
+    public static void saveGame(Game game, String filePath) throws GameControlException {
+        try(FileOutputStream fops = new FileOutputStream(filePath)) {
+            ObjectOutputStream output = new ObjectOutputStream(fops);
+            output.writeObject(game); // write the game object out to file
+        } catch (Exception ex) {
+            throw new GameControlException(ex.getMessage());
+        }
+    }
+
+    public static void getSavedGame(String filePath) throws GameControlException {
+        Game game = null;
+        
+        try (FileInputStream fips = new FileInputStream(filePath)) {
+            ObjectInputStream input = new ObjectInputStream(fips);
+            
+            game = (Game) input.readObject(); // read the game object from file
+        } catch (Exception ex) {
+            throw new GameControlException(ex.getMessage());
+        }
+        
+        // close the output file
+        LostTeam.setCurrentGame(game); // save in LostTeam
     }
 }

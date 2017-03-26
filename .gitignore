@@ -26,6 +26,7 @@ source
 *.log
 *.sql
 *.sqlite
+/log.txt
 
 # OS generated files #
 ######################

@@ -5,9 +5,11 @@
  */
 package byui.cit260.lostteam.model;
 
+import byui.cit260.lostteam.view.CalcVolumeOfFlaskQuestionView;
 import byui.cit260.lostteam.view.ClueView;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +22,7 @@ public class Scene implements Serializable {
     private String signSymbol;
     private int coordinates;
     private Actor actor;
-    private ClueView clueView;
+    private Clue clue;
     //private String name;
 
    
@@ -63,12 +65,20 @@ public class Scene implements Serializable {
         this.actor = actor;
     }
 
-    public ClueView getClueView() {
-        return clueView;
+    public Clue getClue() {
+        return clue;
     }
 
-    public void setClueView(ClueView clueView) {
-        this.clueView = clueView;
+    public void setClue(Clue clue) {
+        this.clue = clue;
+    }
+    
+    public Navigation displayClueView() {
+        if (clue == Clue.CalcVolumeOfFlask) {
+            ClueView clueView = new CalcVolumeOfFlaskQuestionView(this.actor);
+            return clueView.display();
+        }
+        return Navigation.Continue;
     }
 
     @Override

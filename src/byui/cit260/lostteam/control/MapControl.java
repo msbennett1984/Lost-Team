@@ -7,12 +7,14 @@ package byui.cit260.lostteam.control;
 
 import byui.cit260.lostteam.exception.MapControlException;
 import byui.cit260.lostteam.model.Actor;
+import byui.cit260.lostteam.model.Clue;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Point;
 import byui.cit260.lostteam.model.Scene;
 import byui.cit260.lostteam.model.SceneType;
 import byui.cit260.lostteam.view.CalcVolumeOfFlaskQuestionView;
+import byui.cit260.lostteam.view.ClueView;
 import lostteam.LostTeam;
 
 /**
@@ -92,7 +94,7 @@ public class MapControl {
         stopSign.setDescription("Stop Sign");
         stopSign.setSignSymbol("SS");
         stopSign.setActor(Actor.Child);
-        stopSign.setClueView(new CalcVolumeOfFlaskQuestionView(stopSign.getActor()));
+        stopSign.setClue(Clue.CalcVolumeOfFlask);
         scenes[SceneType.Stop_Sign.ordinal()] = stopSign;
 
         // Scene 10
