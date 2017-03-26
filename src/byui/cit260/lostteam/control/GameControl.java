@@ -7,6 +7,7 @@ package byui.cit260.lostteam.control;
 
 import byui.cit260.lostteam.exception.GameControlException;
 import byui.cit260.lostteam.exception.LoseGameException;
+import byui.cit260.lostteam.exception.WinGameException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
@@ -132,5 +133,23 @@ public class GameControl {
         
         // close the output file
         LostTeam.setCurrentGame(game); // save in LostTeam
+    }
+
+    public static void createAntidote() throws LoseGameException, WinGameException {
+        Game game = LostTeam.getCurrentGame();
+        InventoryItem[] inventory = game.getInventory();
+        boolean createdAntidote = true;
+        for (InventoryItem i : inventory) {
+            if (i.getQuantity() >= i.getItem().getRequiredAmount()) {
+                continue;
+            }
+            createdAntidote = false;
+            break;
+        }
+        if (createdAntidote) {
+            throw new WinGameException();
+        } else {
+            decrementRemainingTime(15);
+        }
     }
 }

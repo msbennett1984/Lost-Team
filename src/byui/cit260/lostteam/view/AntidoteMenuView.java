@@ -5,6 +5,9 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.exception.LoseGameException;
+import byui.cit260.lostteam.exception.WinGameException;
 import byui.cit260.lostteam.model.Game;
 import byui.cit260.lostteam.model.InventoryItem;
 import byui.cit260.lostteam.model.Navigation;
@@ -56,7 +59,7 @@ public class AntidoteMenuView extends MenuView {
         
         switch (choice) {
             case "C":
-                this.createAntidote();
+                nav = this.createAntidote();
                 break;
             case "B":
                 // Back to Scene Menu (immediately)
@@ -69,11 +72,19 @@ public class AntidoteMenuView extends MenuView {
         return nav;
     }
 
-    private void createAntidote() {
-        System.out.println("Attempting to create antidote...");
-        System.out.println("FAILED");
-        Game game = LostTeam.getCurrentGame();
-        game.setRemainingTime(game.getRemainingTime() - 15);
-        return;
+    private Navigation createAntidote() {
+        this.console.println("\n*** Attempting to create antidote... ***");
+        try {
+            GameControl.createAntidote();
+        } catch (WinGameException ex) {
+            return Navigation.WonGame;
+        } catch (LoseGameException ex) {
+            this.console.println("*** FAILED ***");
+            this.console.println("*** You lost 15 minutes of time ***");
+            return Navigation.LostGame;
+        }
+        this.console.println("*** FAILED ***");
+        this.console.println("*** You lost 15 minutes of time ***");
+        return Navigation.Continue;
     }
 }

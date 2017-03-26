@@ -15,6 +15,7 @@ public enum Navigation {
     ExitGame,
     ExitView,
     WrongAnswer,
+    WonGame,
     LostGame;
 
 }

@@ -11,6 +11,8 @@ import byui.cit260.lostteam.exception.LoseGameException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Clue;
 import byui.cit260.lostteam.model.Game;
+import byui.cit260.lostteam.model.InventoryItem;
+import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Navigation;
 import byui.cit260.lostteam.model.Scene;
@@ -36,6 +38,7 @@ public class SceneMenuView extends MenuView {
             + "\nS - Search Location"
             + "\nT - Talk to Person"
             + "\nP - Player Stats"
+            + "\nX - Cheat (fill inventory)"
             + "\nB - Back to Game Menu"
             + "\n----------------------------------------");
     }
@@ -59,6 +62,9 @@ public class SceneMenuView extends MenuView {
                 break;
             case "P":
                 nav = this.playerStats();
+                break;
+            case "X":
+                nav = this.cheat();
                 break;
             case "B":
                 // Back to Game Menu (immediately)
@@ -154,5 +160,25 @@ public class SceneMenuView extends MenuView {
         Game game = LostTeam.getCurrentGame(); // retreive the game
         Map map = game.getMap(); // retreive the map from game
         MapControl.displayMap(map, console);
+    }
+    
+    private Navigation cheat() {
+        Game game = LostTeam.getCurrentGame();
+        InventoryItem[] inventory = game.getInventory();
+        for (InventoryItem i : inventory) {
+            while (i.getQuantity() < i.getItem().getRequiredAmount()) {
+                game.addItemToInventory(i.getItem(), 1);
+            }
+        }
+        for (Actor actor : Actor.values()) {
+            GameControl.addInteraction(actor);
+        }
+        Location[][] locations = game.getMap().getLocations();
+        for (int column = 0; column < locations.length; column++) {
+            for (int row = 0; row < locations[column].length; row++) {
+                locations[column][row].setVisited(true);
+            }
+        }
+        return Navigation.Continue;
     }
 }

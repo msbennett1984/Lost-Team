@@ -61,7 +61,13 @@ public class MainMenuView extends MenuView {
         }
         
         if (nav == Navigation.LostGame) {
-            System.out.println("\n*** Game Over ***\n");
+            this.console.println("\n*** You have run out of time ***"
+                               + "\n*** Game Over ***\n");
+            nav = Navigation.Continue;
+        }
+        
+        if (nav == Navigation.WonGame) {
+            this.console.println("\n*** You won the game! Congratulations! ***");
             nav = Navigation.Continue;
         }
       
