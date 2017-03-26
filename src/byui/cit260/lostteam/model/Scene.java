@@ -81,14 +81,6 @@ public class Scene implements Serializable {
     public void setItem(Item item) {
         this.item = item;
     }
-    
-    public Navigation displayClueView() {
-        if (clue == Clue.CalcVolumeOfFlask) {
-            ClueView clueView = new CalcVolumeOfFlaskQuestionView(this.actor);
-            return clueView.display();
-        }
-        return Navigation.Continue;
-    }
 
     @Override
     protected void finalize() throws Throwable {

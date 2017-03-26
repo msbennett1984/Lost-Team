@@ -6,8 +6,12 @@
 package byui.cit260.lostteam.view;
 
 import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.control.MapControl;
+import byui.cit260.lostteam.exception.LoseGameException;
 import byui.cit260.lostteam.model.Actor;
+import byui.cit260.lostteam.model.Clue;
 import byui.cit260.lostteam.model.Game;
+import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Navigation;
 import byui.cit260.lostteam.model.Scene;
 import java.lang.reflect.Constructor;
@@ -74,7 +78,11 @@ public class SceneMenuView extends MenuView {
     
     private Navigation moveMenu() {
         MoveView moveMenu = new MoveView("Scene Menu");
-        return moveMenu.display();
+        Navigation nav = moveMenu.display();
+        if (nav == Navigation.ExitView) {
+            displayMap();
+        }
+        return nav;
     }
 
     private Navigation createAntidote() {
@@ -88,12 +96,63 @@ public class SceneMenuView extends MenuView {
     }
 
     private Navigation talkToPerson() {
+        Game game = LostTeam.getCurrentGame();
         Scene scene = GameControl.getCurrentScene();
-        return scene.displayClueView();
+        Clue clue = scene.getClue();
+        Actor actor = scene.getActor();
+        if (clue == Clue.None) {
+            if (actor == null) {
+                this.console.println("\n*** There is nobody to talk to ***");
+            } else {
+                this.console.println("\n*** There is a " + actor.getDescription() + ", but they don't want to talk with you ***");
+                GameControl.addInteraction(actor);
+            }
+        } else if (clue == Clue.CalcVolumeOfFlask) {
+            ClueView clueView = new CalcVolumeOfFlaskQuestionView(scene.getActor());
+            return clueView.display();
+        } else if (clue == Clue.CalcCylinderVolume) {
+            ClueView clueView = new CalcVolumeOfFlaskQuestionView(scene.getActor());
+            return clueView.display();
+        } else { // GivenByActor, Wastes5Minutes, Wastes10Minutes, or Gains5Minutes
+            this.console.println("\n*** You speak with a " + actor.getDescription() + " ***"
+                               + "\n" + actor.getClueGiven());
+            GameControl.addInteraction(actor);
+            long timeChange = 0;
+            if (clue == Clue.Wastes5Minutes) {
+                this.console.println("\n*** They waste 5 minutes of your time ***");
+                timeChange = -5;
+            } else if (clue == Clue.Wastes10Minutes) {
+                this.console.println("\n*** They waste 10 minutes of your time ***");
+                timeChange = -10;
+            } else if (clue == Clue.Gains5Minutes) {
+                this.console.println("\n*** You gain 5 minutes of time ***");
+                timeChange = 5;
+            }
+            if (timeChange < 0) {
+                try {
+                    GameControl.decrementRemainingTime(-1 * timeChange);
+                } catch (LoseGameException ex) {
+                    return Navigation.LostGame;
+                }
+            } else if (timeChange > 0) {
+                try {
+                    GameControl.incrementRemainingTime(timeChange);
+                } catch (LoseGameException ex) {
+                    return Navigation.LostGame;
+                }
+            }
+        }
+        return Navigation.Continue;
     }
 
     private Navigation playerStats() {
         PlayerStatsView playerStats = new PlayerStatsView();
         return playerStats.display();
+    }
+    
+    private void displayMap() {
+        Game game = LostTeam.getCurrentGame(); // retreive the game
+        Map map = game.getMap(); // retreive the map from game
+        MapControl.displayMap(map, console);
     }
 }

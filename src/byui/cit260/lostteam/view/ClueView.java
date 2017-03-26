@@ -16,8 +16,8 @@ import byui.cit260.lostteam.model.Navigation;
  */
 public abstract class ClueView extends MenuView implements ClueViewInterface {
 
-    private final Actor actor;
-    private final long wrongAnswerTimeDeduction;
+    protected final Actor actor;
+    protected final long wrongAnswerTimeDeduction;
     
     public ClueView(String message, Actor actor, long wrongAnswerTimeDeduction) {
         super(message);
@@ -48,11 +48,6 @@ public abstract class ClueView extends MenuView implements ClueViewInterface {
             } catch (LoseGameException e) {
                 nav = Navigation.LostGame;
             }
-        }
-        
-        if (nav == Navigation.ExitView) {
-            System.out.println("\nMy clue is:\n\n" + actor.getClueGiven());
-            GameControl.addInteraction(actor);
         }
 
         return nav;

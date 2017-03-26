@@ -13,6 +13,12 @@ import java.io.Serializable;
  */
 public enum Clue implements Serializable {
 
-    CalcVolumeOfFlask;
+    None,
+    GivenByActor,
+    Wastes5Minutes,
+    Wastes10Minutes,
+    Gains5Minutes,
+    CalcVolumeOfFlask,
+    CalcCylinderVolume;
 
 }

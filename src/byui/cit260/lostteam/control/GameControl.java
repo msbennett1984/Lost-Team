@@ -88,6 +88,16 @@ public class GameControl {
         game.setRemainingTime(remainingTime);
     }
     
+    public static void incrementRemainingTime(long amount) throws LoseGameException {
+        Game game = LostTeam.getCurrentGame();
+        long remainingTime = game.getRemainingTime();
+        remainingTime = remainingTime + amount;
+        if (remainingTime <= 0) {
+            throw new LoseGameException();
+        }
+        game.setRemainingTime(remainingTime);
+    }
+    
     public static void addInteraction(Actor actor) {
         Game game = LostTeam.getCurrentGame();
         game.addInteraction(actor);

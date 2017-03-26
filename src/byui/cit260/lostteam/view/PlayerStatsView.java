@@ -188,6 +188,12 @@ public class PlayerStatsView extends MenuView {
     }
 
     private void timeRemaining() {
-        System.out.println("*** TimeRemaining function called ***");
+        Game game = LostTeam.getCurrentGame();
+        String minutes = "minutes";
+        long remainingTime = game.getRemainingTime();
+        if (remainingTime == 1) {
+            minutes = "minute";
+        }
+        this.console.println("\n*** You have " + remainingTime + " " + minutes + " remaining ***");
     }
 }

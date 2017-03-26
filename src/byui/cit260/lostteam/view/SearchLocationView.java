@@ -52,7 +52,7 @@ public class SearchLocationView extends MenuView {
     private Navigation searchLocation() {
         Scene scene = GameControl.getCurrentScene();
         Item item = scene.getItem();
-        if (item == null) {
+        if (item == null || item == Item.Nothing) {
             this.console.println("\n*** No items found *** you wasted 5 minutes of time");
             try {
                 GameControl.decrementRemainingTime(5);

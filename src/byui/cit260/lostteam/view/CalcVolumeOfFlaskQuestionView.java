@@ -43,30 +43,33 @@ public class CalcVolumeOfFlaskQuestionView extends ClueView {
 
     @Override
     public Navigation answerQuestion() {
-        System.out.println("Please enter the height of the flask:");
+        this.console.println("Please enter the height of the flask:");
         int height = getInputInteger();
-        System.out.println("Please enter the radius of the flask:");
+        this.console.println("Please enter the radius of the flask:");
         int radius = getInputInteger();
         double volume = -1;
         try {
             volume = ClueControl.calcVolumeOfFlask((double)height, (double)radius);
         } catch (NonPositiveHeightException e) {
-            System.out.println("\n*** Height must be positive *** Try again");
+            this.console.println("\n*** Height must be positive *** Try again");
             return Navigation.WrongAnswer;
         } catch (NonPositiveRadiusException e) {
-            System.out.println("\n*** Radius must be positive *** Try again");
+            this.console.println("\n*** Radius must be positive *** Try again");
             return Navigation.WrongAnswer;
         } catch (VolumeLowException e) {
-            System.out.println("\n*** Volume of flask is too small *** Try again");
+            this.console.println("\n*** Volume of flask is too small *** Try again");
             return Navigation.WrongAnswer;
         } catch (VolumeHighException e) {
-            System.out.println("\n*** Volume of flask is too big *** Try again");
+            this.console.println("\n*** Volume of flask is too big *** Try again");
             return Navigation.WrongAnswer;
         } catch (ClueControlException e) {
-            System.out.println("\n*** Unknown error: " + e.getMessage() + " *** Try again");
+            this.console.println("\n*** Unknown error: " + e.getMessage() + " *** Try again");
             return Navigation.Continue;
         }
-        System.out.println("\n*** Success! *** The flask volume of " + volume + " is just right!");
+        this.console.println("\n*** Success! *** The flask volume of " + volume + " is just right!"
+                           + "\n*** The " + actor.getDescription() + " gives you a clue ***"
+                           + "\n" + actor.getClueGiven());
+        GameControl.addInteraction(actor);
         return Navigation.ExitView;
     }
 }

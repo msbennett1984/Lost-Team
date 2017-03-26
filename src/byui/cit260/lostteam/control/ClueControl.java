@@ -17,19 +17,19 @@ import byui.cit260.lostteam.exception.VolumeLowException;
  */
 public class ClueControl {
     
-    public double calcVolumeOfCylinder(double height, double radius) {
+    public static double calcVolumeOfCylinder(double height, double radius) throws ClueControlException {
         if (height <= 0) {
-            return -1; // height is negative
+            throw new NonPositiveHeightException(); // height is negative
         } else if (radius <= 0) {
-            return -2; // radius is negative
+            throw new NonPositiveRadiusException(); // radius is negative
         }
         
         double volume = (height * Math.PI * Math.pow(radius, 2));
         
         if (volume < 50) {
-            return -3; // volume is too low
+            throw new VolumeLowException(); // volume is too low
         } else if (volume > 125) {
-            return -4; // volume is too high
+            throw new VolumeHighException(); // volume is too high
         } else {
             return volume;
         }
