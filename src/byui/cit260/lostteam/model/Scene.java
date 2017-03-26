@@ -23,6 +23,7 @@ public class Scene implements Serializable {
     private int coordinates;
     private Actor actor;
     private Clue clue;
+    private Item item;
     //private String name;
 
    
@@ -71,6 +72,14 @@ public class Scene implements Serializable {
 
     public void setClue(Clue clue) {
         this.clue = clue;
+    }
+    
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
     
     public Navigation displayClueView() {

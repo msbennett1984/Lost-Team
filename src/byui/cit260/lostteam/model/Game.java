@@ -53,6 +53,10 @@ public class Game implements Serializable{
         i.setQuantity(i.getQuantity() + quantity);
     }
 
+    public InventoryItem getInventoryItem(Item item) {
+        InventoryItem i = inventory[item.ordinal()];
+        return i;
+    }
     
     public Set<Actor> getInteractions() {
         return interactions;

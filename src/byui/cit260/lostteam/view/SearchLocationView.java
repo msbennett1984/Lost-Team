@@ -5,7 +5,14 @@
  */
 package byui.cit260.lostteam.view;
 
+import byui.cit260.lostteam.control.GameControl;
+import byui.cit260.lostteam.exception.LoseGameException;
+import byui.cit260.lostteam.model.Game;
+import byui.cit260.lostteam.model.InventoryItem;
+import byui.cit260.lostteam.model.Item;
 import byui.cit260.lostteam.model.Navigation;
+import byui.cit260.lostteam.model.Scene;
+import lostteam.LostTeam;
 
 /**
  *
@@ -15,12 +22,12 @@ public class SearchLocationView extends MenuView {
     
     SearchLocationView(){
         super("\n"
-        + "\n----------------------------------------------"
-        + "\nWould you like to search your current location"
-        + "\n                 for Items?"
-        + "\nY - Yes (search for Items)"
-        + "\nN - No (No return to Scene Menu)"
-        + "\n");
+            + "\n----------------------------------------------"
+            + "\nWould you like to search your current location"
+            + "\n                 for Items?"
+            + "\nY - Yes (search for Items)"
+            + "\nN - No (No return to Scene Menu)"
+            + "\n");
     }
     
     @Override
@@ -43,7 +50,24 @@ public class SearchLocationView extends MenuView {
     }
 
     private Navigation searchLocation() {
-        System.out.println("\n SearchLocation function found ");
-        return Navigation.Continue;
+        Scene scene = GameControl.getCurrentScene();
+        Item item = scene.getItem();
+        if (item == null) {
+            this.console.println("\n*** No items found *** you wasted 5 minutes of time");
+            try {
+                GameControl.decrementRemainingTime(5);
+            } catch (LoseGameException ex) {
+                return Navigation.LostGame;
+            }
+        } else {
+            Game game = LostTeam.getCurrentGame();
+            game.addItemToInventory(item, item.getAmountFound());
+            InventoryItem inventoryItem = game.getInventoryItem(item);
+            this.console.println("\n*** Found " + item.getAmountFound()
+                               + " " + item.getName(item.getAmountFound()) + " ***"
+                               + "\n*** You now have " + inventoryItem.getQuantity()
+                               + " " + item.getName(inventoryItem.getQuantity()) + " ***");
+        }
+        return Navigation.ExitView;
     }
 }

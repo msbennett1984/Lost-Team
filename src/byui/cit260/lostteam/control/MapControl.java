@@ -8,6 +8,7 @@ package byui.cit260.lostteam.control;
 import byui.cit260.lostteam.exception.MapControlException;
 import byui.cit260.lostteam.model.Actor;
 import byui.cit260.lostteam.model.Clue;
+import byui.cit260.lostteam.model.Item;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Point;
@@ -45,7 +46,6 @@ public class MapControl {
         subLabratory.setSignSymbol("SL");
         subLabratory.setActor(Actor.Scientist);
         scenes[SceneType.Subway_Car_Lab.ordinal()] = subLabratory;
-        
 
         // Scene 2
         Scene bathroom1 = new Scene();
@@ -57,6 +57,7 @@ public class MapControl {
         Scene ticketBooth = new Scene();
         ticketBooth.setDescription("TicketBooth");
         ticketBooth.setSignSymbol("TB");
+        ticketBooth.setItem(Item.Coconut);
         scenes[SceneType.Ticket_Booth.ordinal()] = ticketBooth;
 
         // Scene 4

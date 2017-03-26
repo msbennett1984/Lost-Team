@@ -83,10 +83,8 @@ public class SceneMenuView extends MenuView {
     }
 
     private Navigation searchLocation() {
-        // SearchLocationView searchLocation = new SearchLocationView();
-        // searchLocation
-        System.out.println("\n SearchLocation Function called ");
-        return Navigation.Continue;
+        SearchLocationView searchLocationView = new SearchLocationView();
+        return searchLocationView.display();
     }
 
     private Navigation talkToPerson() {
