@@ -34,6 +34,7 @@ public class PlayerStatsView extends MenuView {
             + "\n-----------------------------------------"
             + "\nP - People Spoken To (Clues)             "
             + "\nI - Item Inventory                       "
+            + "\nZ - Item Inventory  (Debug)              "
             + "\nL - Locations Visited                    "
             + "\nX - Locations Visited (Debug)            "
             + "\nT - Time Remaining                       "
@@ -50,7 +51,10 @@ public class PlayerStatsView extends MenuView {
                 this.peopleSpokenTo();
                 break;
             case "I":
-                this.itemInventory();
+                this.itemInventory(this.console);
+                break;
+            case "Z":
+                this.itemInventoryDebug();
                 break;
             case "L":
                 this.locationsVisited(this.console);
@@ -116,13 +120,13 @@ public class PlayerStatsView extends MenuView {
         System.out.println("Total number of actors is " + actors.size());
     }
 
-    private void itemInventory() {
+    private void itemInventory(PrintWriter write) {
         StringBuilder line;
         
         Game game = LostTeam.getCurrentGame();
         InventoryItem[] inventory = game.getInventory();
         
-        System.out.println("\n                  Item Inventory   ");
+        write.println("\n                  Item Inventory                   ");
         line = new StringBuilder("                                       ");
         line.insert(0, "Description");
         line.insert(20, "In Stock");
@@ -136,9 +140,22 @@ public class PlayerStatsView extends MenuView {
             line.insert(20, item.getQuantity());
             
             //displays it to the line
-            System.out.println(line.toString());
+            write.println(line.toString());
         }
         
+    }
+    private void itemInventoryDebug() {
+        // prompt for and get the name of the file to save the game in
+        this.console.println("\n\nEnter the file path for the file where the "
+                             + "locations visited is to be saved.");
+        String filePath = this.getInput();
+         
+         try(FileOutputStream fops = new FileOutputStream(filePath)) {
+             PrintWriter output = new PrintWriter(fops, true);
+             this.locationsVisited(output); // write the locations visited to the file
+         } catch (Exception ex) {
+             ErrorView.display(this.getClass().getName(), ex.getMessage());
+         }
     }
 
     private void locationsVisited(PrintWriter writer) {
@@ -196,4 +213,5 @@ public class PlayerStatsView extends MenuView {
         }
         this.console.println("\n*** You have " + remainingTime + " " + minutes + " remaining ***");
     }
+
 }
