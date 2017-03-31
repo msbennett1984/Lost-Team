@@ -21,7 +21,7 @@ public class GameMenuView extends MenuView {
     public GameMenuView(){
         super("\n"
             + "\n-----------------------------------------"
-            + "\n| Game Menu View                        |"
+            + "\n| Game Menu                             |"
             + "\n-----------------------------------------"
             + "\nD - Display Map                          "
             + "\nM - Move to new Location"
