@@ -25,14 +25,16 @@ public class CalcCylinderVolumeView extends ClueView {
         super(
           "\n                                                       "
         + "\n-------------------------------------------------------"
-        + "\nA police officer is investigating the scene of a crime "
-        + "\nthat was committed. 'It was a murder,' he tells you.   "
-        + "\nThe victim was shot with a 9 mm, we have a rough idea  "
-        + "\nof the distance, but we need to find the TRAJECTORY of "
-        + "\nthe bullet. Help us out and I will tell you something  "
-        + "\nuseful. Will you help?                                 "
+        + "\nA lost child has his finger in a leaking pipe and ask  "
+        + "\nyou to help him by making a plug for the hole. As you  "
+        + "\nstudy the problem you realize that you will need a     "
+        + "\ncylinder. But what size? If you calculate the volume of"
+        + "\na cylinder and create that size then you will have the "
+        +  "\nperfect plug. Create the cylinder by entering height   "
+        + "\nand radius. If it is either too big or too small,      "
+        + "\nyou will need to create another. Will you help         "
         + "\nY - Yes I will help                                    "
-        + "\nN - No I will not help (back to Scene Menu             ",
+        + "\nN - No I will not help (back to Scene Menu)            ",
             actor,
             100 // wrongAnswerTimeDeduction
         );
