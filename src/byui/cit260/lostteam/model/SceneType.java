@@ -5,11 +5,13 @@
  */
 package byui.cit260.lostteam.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Dallin Barlow
  */
-public enum SceneType {
+public enum SceneType implements Serializable {
     Subway_Car_Lab,
     Bathroom1,
     Bathroom2,

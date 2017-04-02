@@ -5,11 +5,13 @@
  */
 package byui.cit260.lostteam.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Sherry Bennett <msbennett84@gmail.com>
  */
-public enum Navigation {
+public enum Navigation implements Serializable{
     
     Continue,
     ExitGame,

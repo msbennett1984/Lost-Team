@@ -24,7 +24,7 @@ public class GameMenuView extends MenuView {
             + "\n| Game Menu View                        |"
             + "\n-----------------------------------------"
             + "\nD - Display Map                          "
-            + "\nM - Move to new Location"
+            + "\nP - Player Stats"
             + "\nS - Scene menu"
             + "\nB - Back to Main Menu"
             + "\nE - Exit Game"
@@ -38,6 +38,9 @@ public class GameMenuView extends MenuView {
         switch (choice) {
             case "D":
                 this.displayMap();
+                break;
+            case "P":
+                nav = this.playerStats();
                 break;
             case "M":
                 nav = this.moveMenu();
@@ -64,6 +67,11 @@ public class GameMenuView extends MenuView {
         return nav;
     }
     
+    private Navigation playerStats() {
+        PlayerStatsView playerStats = new PlayerStatsView();
+        return playerStats.display();
+    }
+    
     private Navigation sceneMenu() {
         SceneMenuView sceneMenu = new SceneMenuView();
         return sceneMenu.display();
@@ -82,5 +90,6 @@ public class GameMenuView extends MenuView {
         Game game = LostTeam.getCurrentGame(); // retreive the game
         Map map = game.getMap(); // retreive the map from game
         MapControl.displayMap(map, console);
+        
     }
 }

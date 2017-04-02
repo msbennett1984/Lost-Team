@@ -28,10 +28,17 @@ public class ActorType implements Serializable {
     public String getDescription() {
         return actor.getDescription();
     }
-    public String getClueGiven() {
+    public int getClueGiven() {
         return actor.getClueGiven();
     }
 
+    public String getItemName() {
+        return actor.getItemName();
+    }
+    
+    public String getConversation() {
+        return actor.getConversation();
+    }
     @Override
     public int hashCode() {
         int hash = 7;

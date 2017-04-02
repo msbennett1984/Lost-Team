@@ -15,6 +15,7 @@ import byui.cit260.lostteam.model.InventoryItem;
 import byui.cit260.lostteam.model.Location;
 import byui.cit260.lostteam.model.Map;
 import byui.cit260.lostteam.model.Navigation;
+import byui.cit260.lostteam.model.Player;
 import byui.cit260.lostteam.model.Scene;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -31,7 +32,7 @@ public class SceneMenuView extends MenuView {
     public SceneMenuView() {
         super("\n"
             + "\n-----------------------------------------"
-            + "\n| Scene Menu                            |"
+            + "\n|              Scene Menu                |"
             + "\n-----------------------------------------"
             + "\nM - Move: change Location"
             + "\nC - Create Antidote"
@@ -59,9 +60,6 @@ public class SceneMenuView extends MenuView {
                 break;
             case "T":
                 nav = this.talkToPerson();
-                break;
-            case "P":
-                nav = this.playerStats();
                 break;
             case "X":
                 nav = this.cheat();
@@ -117,7 +115,7 @@ public class SceneMenuView extends MenuView {
             ClueView clueView = new CalcVolumeOfFlaskQuestionView(scene.getActor());
             return clueView.display();
         } else if (clue == Clue.CalcCylinderVolume) {
-            ClueView clueView = new CalcVolumeOfFlaskQuestionView(scene.getActor());
+            ClueView clueView = new CalcCylinderVolumeView(scene.getActor());
             return clueView.display();
         } else { // GivenByActor, Wastes5Minutes, Wastes10Minutes, or Gains5Minutes
             this.console.println("\n*** You speak with a " + actor.getDescription() + " ***"
