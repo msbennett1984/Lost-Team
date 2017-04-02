@@ -33,7 +33,7 @@ public class StartProgramView {
         
         System.out.println(
               "\n************************************************"
-            + "\n                                               *"
+            + "\n*                                              *"
             + "\n* In this game, you will be taking on the role *"
             + "\n* of a person who has woken up with            *"
             + "\n* dissociative amenesia. You wake up in a      *"
@@ -60,7 +60,7 @@ public class StartProgramView {
             + "\n* and found the antidote.                      *"
             + "\n*                                              *"
             + "\n* Gook luck and have fun in this adventure!    *"
-            + "\n                                               *"
+            + "\n*                                              *"
             + "\n************************************************"
             );
     }

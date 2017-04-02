@@ -14,15 +14,15 @@ import java.io.Serializable;
 public enum Item implements Serializable {
     
     // fixed enum list (singularName, pluralName, requiredAmount, amountFound),
-    Mushroom("Mushroom", "Mushrooms", 1, 1),
-    Coconut("Coconut", "Coconuts", 1, 1),
-    TicTac("Tic-Tac", "Tic-Tacs", 5, 1),
-    HotDog("Hot Dog", "Hot Dogs", 2, 1),
-    Aspirin("Aspirin", "Aspirin", 10, 1),
-    DeliMeat("Deli Meat", "Deli Meat", 2, 1),
-    BottledWater("Bottled Water", "Bottles of Water", 2, 1),
-    Nutmilk("Nutmilk", "Nutmilk", 2, 1),
-    Nothing("Nothing", "Nothing", 0, 0);
+    Mushroom        ("Mushroom", "Mushrooms", 1, 1),
+    Coconut         ("Coconut", "Coconuts", 1, 1),
+    TicTac          ("Tic-Tac", "Tic-Tacs", 5, 1),
+    HotDog          ("Hot Dog", "Hot Dogs", 2, 1),
+    Aspirin         ("Aspirin", "Aspirin", 10, 1),
+    DeliMeat        ("Deli Meat", "Deli Meat", 2, 1),
+    BottledWater    ("Bottled Water", "Bottles of Water", 2, 1),
+    Nutmilk         ("Nutmilk", "Nutmilk", 2, 1),
+    Nothing         ("Nothing", "Nothing", 0, 0);
     
     // class instance variables
     private final String singularName;
