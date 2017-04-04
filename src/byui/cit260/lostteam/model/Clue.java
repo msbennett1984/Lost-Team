@@ -19,6 +19,7 @@ public enum Clue implements Serializable {
     Wastes10Minutes,
     Gains5Minutes,
     CalcVolumeOfFlask,
-    CalcCylinderVolume;
+    CalcCylinderVolume,
+    CalcTrajectory;
 
 }

@@ -88,6 +88,7 @@ public class GameMenuView extends MenuView {
     
     private void displayMap() {
         Game game = LostTeam.getCurrentGame(); // retreive the game
+        Location location = new Location();
         Map map = game.getMap(); // retreive the map from game
         MapControl.displayMap(map, console);
         

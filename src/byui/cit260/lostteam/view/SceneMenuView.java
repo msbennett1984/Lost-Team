@@ -90,6 +90,7 @@ public class SceneMenuView extends MenuView {
     }
 
     private Navigation createAntidote() {
+        
         AntidoteMenuView antidoteView = new AntidoteMenuView();
         return antidoteView.display();
     }
@@ -117,7 +118,11 @@ public class SceneMenuView extends MenuView {
         } else if (clue == Clue.CalcCylinderVolume) {
             ClueView clueView = new CalcCylinderVolumeView(scene.getActor());
             return clueView.display();
-        } else { // GivenByActor, Wastes5Minutes, Wastes10Minutes, or Gains5Minutes
+        } else if (clue == Clue.CalcTrajectory){
+            ClueView clueView = new TrajectoryQuestionView(scene.getActor());
+            return clueView.display();
+        }
+        else { // GivenByActor, Wastes5Minutes, Wastes10Minutes, or Gains5Minutes
             this.console.println("\n*** You speak with a " + actor.getDescription() + " ***"
                                + "\n" + actor.getClueGiven());
             GameControl.addInteraction(actor);

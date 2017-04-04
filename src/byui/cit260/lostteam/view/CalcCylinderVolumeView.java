@@ -30,7 +30,7 @@ public class CalcCylinderVolumeView extends ClueView {
         + "\nstudy the problem you realize that you will need a     "
         + "\ncylinder. But what size? If you calculate the volume of"
         + "\na cylinder and create that size then you will have the "
-        +  "\nperfect plug. Create the cylinder by entering height   "
+        + "\nperfect plug. Create the cylinder by entering height   "
         + "\nand radius. If it is either too big or too small,      "
         + "\nyou will need to create another. Will you help         "
         + "\nY - Yes I will help                                    "

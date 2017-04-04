@@ -163,10 +163,5 @@ public class Map implements Serializable {
     public String toString() {
         return "Map{" + "rowCount=" + rowCount + ", columnCount=" + columnCount + ", currentRow=" + currentRow + ", currentColumn=" + currentColumn + ", currentScene=" + currentScene + '}';
     }
-    
-    
-    
-    
-    
-    
+      
 }

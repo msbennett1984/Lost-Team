@@ -92,7 +92,8 @@ public enum Actor implements Serializable {
     OldMan          ("Old Man",          1, 3,"\n'To say there is something for everyone in our Food Court "
                                                 + "\nwould be an understatement.' said the old man as he "
                                                 + "\nsmiles at you. As you smiled back, he tells "
-                                                + "\nyou need TODO nutmilk.",Item.Mushroom.getName(0),Item.Mushroom.getRequiredAmount()),
+                                                + "\nyou need TODO nutmilk.",
+                                                Item.Mushroom.getName(0),Item.Mushroom.getRequiredAmount()),
     LostChild       ("Lost Child",       2, 3,"\nThe lost child is so grateful for your help and tells you ",
                                                 Item.Nothing.getName(0),Item.Nothing.getRequiredAmount()),
     YoungCouple     ("Young Couple",     3, 3,"\nA young couple tell you all about their wedding plans"

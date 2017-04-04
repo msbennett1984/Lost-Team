@@ -55,7 +55,7 @@ public class ClueControl {
     
     
     // Calculate Trajectory Distance of a bullet function (Dallin Barlow)
-    public double calcTrajectoryDistance(double velocity, double gravity) {
+    public static double calcTrajectoryDistance(double velocity, double gravity) throws ClueControlException {
         
         // if user inputs a zero or a negative number in for velocity
         if (velocity <= 0){
