@@ -369,4 +369,17 @@ public class MapControl {
             writer.println("|");
         }
     }
+    
+    public static void displayMapKey(Map map, PrintWriter writer) {
+        Location[][] locations = map.getLocations();
+        writer.println(
+                "\n****************************************************************"
+              + "\n*                           Map Key                            *");
+        for (Location[] location1 : locations) {
+            for (Location location : location1) {
+                writer.println(String.format("%1$-63s", "* " + location.getScene().getSignSymbol() + ": " + location.getScene().getDescription()) + "*");
+            }
+        }
+        writer.println("****************************************************************");
+    }
 }
