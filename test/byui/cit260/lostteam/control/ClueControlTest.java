@@ -38,13 +38,10 @@ public class ClueControlTest {
         
         double expResult = 56.55; // expected output returned value
         
-        // create instance of ClueControl class
-        ClueControl instance = new ClueControl();
-        
         // call function to run test
         double result = 0;
         try {
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,7 +61,7 @@ public class ClueControlTest {
         expResult = -1; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,7 +81,7 @@ public class ClueControlTest {
         expResult = -2; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,7 +102,7 @@ public class ClueControlTest {
         expResult = -3; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,7 +123,7 @@ public class ClueControlTest {
         expResult = -4; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -147,7 +144,7 @@ public class ClueControlTest {
         expResult = 50.27; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -169,7 +166,7 @@ public class ClueControlTest {
         expResult = 122.52; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,7 +187,7 @@ public class ClueControlTest {
         expResult = 62.83; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -211,7 +208,7 @@ public class ClueControlTest {
         expResult = 113.10; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfCylinder(height, radius);
+            result = ClueControl.calcVolumeOfCylinder(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -239,14 +236,11 @@ public class ClueControlTest {
         double radius = 3;
         
         double expResult = 18.85; // expected output returned value
-        
-        // create instance of ClueControl class
-        ClueControl instance = new ClueControl();
-        
+
         // call function to run test
         double result = 0;
         try {
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -266,7 +260,7 @@ public class ClueControlTest {
         expResult = -1; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -286,7 +280,7 @@ public class ClueControlTest {
         expResult = -2; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -307,7 +301,7 @@ public class ClueControlTest {
         expResult = -3; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,7 +322,7 @@ public class ClueControlTest {
         expResult = -4; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -349,7 +343,7 @@ public class ClueControlTest {
         expResult = 16.76; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -371,7 +365,7 @@ public class ClueControlTest {
         expResult = 24.08; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -392,7 +386,7 @@ public class ClueControlTest {
         expResult = 16.76; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -413,7 +407,7 @@ public class ClueControlTest {
         expResult = 20.95; // expected output returned value
         try {
             // call function to run test
-            result = instance.calcVolumeOfFlask(height, radius);
+            result = ClueControl.calcVolumeOfFlask(height, radius);
         } catch (ClueControlException ex) {
             Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -443,11 +437,15 @@ public class ClueControlTest {
         // expected output return value
         double expResult = 78;
         
-        // create instance of ClueControl class
-        ClueControl instance = new ClueControl();
-        
         // call function to run test 1
-        double result = instance.calcTrajectoryDistance(velocity, gravity);
+        double result = 0;
+        
+        try {
+            // call function to run test
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -465,8 +463,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = -1;
         
-        // call function to run test 2
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 2
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -483,8 +485,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = -2;
         
-        // call function to run test 3
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 3
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -501,8 +507,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = -4;
         
-        // call function to run test 4
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 4
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -519,8 +529,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = -3;
         
-        // call function to run test 5
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 5
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -537,8 +551,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = 1;
         
-        // call function to run test 6
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 6
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -555,8 +573,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = 300;
         
-        // call function to run test 7
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 7
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
@@ -573,8 +595,12 @@ public class ClueControlTest {
         // expected output return value
         expResult = 200;
         
-        // call function to run test 8
-        result = instance.calcTrajectoryDistance(velocity, gravity);
+        try {
+            // call function to run test 8
+            result = ClueControl.calcTrajectoryDistance(velocity, gravity);
+        } catch (ClueControlException ex) {
+            Logger.getLogger(ClueControlTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // compare expected return value with the actual value returned
         assertEquals(expResult, result, 0.0);
